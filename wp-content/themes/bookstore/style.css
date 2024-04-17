@@ -6,3 +6,56 @@ AUthor: Stanford
 Tags: OOP, Medicine
 Requires PHP: 7.4
 */
+
+/* General Config */
+:root {
+    --var-primary-color: #525c7b;
+    --var-secondary-color: #53595f;
+    --var-tertiary-color: #94123f;
+    --var-text-light-color: #fff;
+    --var-text-dark-color: #707070;
+    --var-accent-color: #333333;
+    --var-divider-color: #cecece;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/* Typography */
+a {
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+}
+
+    /* Topnav Header */
+    #topnav-header {
+        background: var(--var-primary-color);
+        padding: 20px;
+    }
+
+    #topnav-header .navbar {
+        justify-content: space-between;
+    }
+
+    #topnav-header .nav-item * {
+        color: var(--var-text-light-color);
+    }
+
+    #topnav-header .nav-link {
+        padding-left: 15px;
+    }

@@ -1,5 +1,9 @@
 <?php
 /**
+ * Register_Scripts_Style
+ * 
+ * @package Bookstore
+ * 
  * Register and enqueue script and stylesheet
  * 
  */

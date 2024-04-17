@@ -4,7 +4,7 @@
  * 
  * @package Bookstore
  * 
- * restrict the instantiation of a class to a single object
+ * Restrict the instantiation of a class to a single object
  * Each class can ony be instantated once across the project
  */
 
@@ -31,4 +31,5 @@ trait Singleton {
          */
         return self::$instance[$called_class];
     }
-}   
+}
+?>
