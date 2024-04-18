@@ -6,7 +6,7 @@
  * 
  * This class is used to Registers theme support for a given feature.
  */
-class Theme_Config {
+class Add_Themes {
     /**
      * Prevent from multiple instantiations
      */
@@ -17,9 +17,9 @@ class Theme_Config {
      * "string $features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
      */
     private $features = array(
-        'custom-logo' => [],
-        'title-tag' => [],
-        'widgets' => []
+        'custom-logo' => array(),
+        'title-tag' => array(),
+        'widgets' => array()
     );
 
     /**

@@ -7,6 +7,8 @@ Tags: OOP, Medicine
 Requires PHP: 7.4
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap');
+
 /* General Config */
 :root {
     --var-primary-color: #525c7b;
@@ -19,6 +21,9 @@ Requires PHP: 7.4
 }
 
 * {
+    font-family: "Jersey 10 Charted", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     margin: 0;
     padding: 0;
 }
