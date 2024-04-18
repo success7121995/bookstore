@@ -18,4 +18,4 @@ Register_Scripts_Style::get_instance();
 /**
  * Add theme support
  */
-Theme_Config::get_instance();
+Add_Themes::get_instance();
