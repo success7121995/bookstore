@@ -14,4 +14,8 @@ require_once __DIR__ . '/inc/helpers/autoloader.php';
  * Register and enqueue scripts and stylesheets
  */
 Register_Scripts_Style::get_instance();
-?>
+
+/**
+ * Add theme support
+ */
+Theme_Config::get_instance();

@@ -32,4 +32,3 @@ trait Singleton {
         return self::$instance[$called_class];
     }
 }
-?>
