@@ -7,6 +7,7 @@ Tags: OOP, Medicine
 Requires PHP: 7.4
 */
 
+/* Import Google font */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* General Config */
@@ -33,11 +34,18 @@ Requires PHP: 7.4
 
 body {
     width: 100%;
+    min-width: 365px;
 }
 
 .container {
     width: 90%;
     margin: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 80%;
+    }
 }
 
 /* Typography */
@@ -59,17 +67,26 @@ li {
         font-family: var(--var-body-font);
     }
 
+    h2 {
+        color: var(--var-primary-color); /* h2 is preset to heading */
+    }
+
 /* Button */
 button {
     border: none;
     outline: none;
+    background: none;
+    cursor: pointer;
 }
 
 /* Navbar */
+.nav-item * {
+    font-size: 15px;
+}
     /* Topnav Header */
     #topnav-header {
         background: var(--var-primary-color);
-        padding: 20px;
+        padding: 10px 0;
     }
 
     #topnav-header .navbar {
@@ -86,8 +103,10 @@ button {
     }
 
     /* Topnav Footer */
-    #topnav-footer .bi-list {
-        font-size: 15px;
+    #topnav-footer {
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
     }
 
     #topnav-footer .navbar {
@@ -96,13 +115,107 @@ button {
         align-items: center;
     }
 
+    @media (min-width: 768px) {
+        #topnav-footer {
+            flex-direction: column;
+        }
+    }
+
+    #topnav-footer .navbar-toggler {
+        display: block;
+        font-size: 35px;
+    }
+
     /* Topnav Nav */
-    #topnav-footer .navbar-nav {
+    #topnav-nav .navbar-toggler {
+        color: var(--var-primary-color);
+    }
+
+    #topnav-nav .navbar-nav {
         display: none;
+        background: var(--var-primary-color);
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 110px;
+    }
+
+    #topnav-nav .navbar-toggler-wrapper {
+        justify-content: flex-end;
+        padding-top: 10px;
+    }
+ 
+    #topnav-nav .nav-link {
+        display: block;
+        color: var(--var-text-light-color);
+        width: 100%;
+        padding: 10px;
+    }
+
+    #topnav-nav .nav-link:hover {
+        background: #3d4b75;
     }
 
     @media (min-width: 768px) {
-        #topnav-footer .navbar-nav {
-            display: flex;
+        #topnav-nav .navbar-toggler {
+            display: none;
+        }
+
+        #topnav-nav .navbar-nav {
+            display: flex !important;
+            background: none;
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
+            position: static;
+        }
+
+        #topnav-nav .nav-item {
+            padding: 10px 0;
+        }
+
+        #topnav-nav .nav-link {
+            color: var(--var-primary-color);
+        }
+
+        #topnav-nav .nav-link:hover {
+            background: none;
+            text-decoration: underline;
+        }
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+        display: none;
+        background: #2f3a58;
+    }
+
+    .dropdown-link {
+        display: block;
+        color: var(--var-text-light-color);
+        padding: 10px 40px;
+    }
+
+    .dropdown-link:hover {
+        background: #394566;
+    }
+
+    @media (min-width: 768px) {
+        .dropdown-menu {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            left:0;
+        }
+
+        .dropdown-item {
+            /* width:50px; */
+        }
+
+        .dropdown-link {
+            display: inline;
+            padding: 10px 0;
         }
     }

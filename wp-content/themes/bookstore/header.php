@@ -22,7 +22,7 @@ wp_head();
 
     <!-- Topnav Footer -->
     <nav id="topnav-footer">
-        <div class="navbar container">
+        <div id="" class="navbar container">
             <?php
             /**
              * Get custom logo
@@ -31,18 +31,52 @@ wp_head();
             ?>
             <form class="search-form">
                 <input type="text">
-                <button>Submit</button>
+                <button><i class="bi bi-search"></i></button>
             </form>
         </div>
-        <div class="container">
-            <i class="bi bi-list"></i>
-            <ul class="navbar-nav">
+        <div id="topnav-nav">
+            <div class="navbar container navbar-toggler-wrapper">
+                <button class="navbar-toggler" data-target="navbar-nav">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+            <ul id="navbar-nav" class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
                 </li>    
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                    <ul></ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggler" href="#">Home</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                    </ul>
+                </li>    
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggler" href="#">Home</a>
+                    <ul class="dropdown-menu">  
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="dropdown-link" href="#">Test</a>
+                        </li>
+                    </ul>
                 </li>    
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
