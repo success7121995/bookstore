@@ -7,10 +7,11 @@ Tags: OOP, Medicine
 Requires PHP: 7.4
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* General Config */
 :root {
+    /* Color */
     --var-primary-color: #525c7b;
     --var-secondary-color: #53595f;
     --var-tertiary-color: #94123f;
@@ -18,12 +19,14 @@ Requires PHP: 7.4
     --var-text-dark-color: #707070;
     --var-accent-color: #333333;
     --var-divider-color: #cecece;
+
+    /* Font Families */
+    --var-heading-font: "Tinos", serif;
+    --var-body-font: "Open Sans", sans-serif;
+
 }
 
 * {
-    font-family: "Jersey 10 Charted", sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
     margin: 0;
     padding: 0;
 }
@@ -45,6 +48,16 @@ a {
 li {
     list-style-type: none;
 }
+
+    /* Heading Font */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--var-heading-font); 
+    }
+
+    /* Body Font */
+    a, p, span, button, ul, li {    
+        font-family: var(--var-body-font);
+    }
 
 /* Button */
 button {
@@ -73,6 +86,10 @@ button {
     }
 
     /* Topnav Footer */
+    #topnav-footer .bi-list {
+        font-size: 15px;
+    }
+
     #topnav-footer .navbar {
         display: flex;
         justify-content: space-between;
