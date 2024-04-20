@@ -5,22 +5,13 @@
  * @package Bookstore
  * 
  * This class is used to Registers theme support for a given feature.
+ * Menu registration is also included.
  */
 class Add_Themes {
     /**
      * Prevent from multiple instantiations
      */
     use Singleton;
-
-    /**
-     * Array of themes we want to add to wordpress
-     * "string $features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
-     */
-    private $features = array(
-        'custom-logo' => array(),
-        'title-tag' => array(),
-        'widgets' => array()
-    );
 
     /**
      * The __construct function is set to private since it is not allowed to instantiate in in public.
@@ -30,14 +21,40 @@ class Add_Themes {
          * Actions
          */
         add_action('after_setup_theme', [$this, 'adding_themes']);
+        add_action('after_setup_theme', [$this, 'register_custom_menus']);
     }
 
-    /**
-     * loop through the args to activate theme supports
-     */
     public function adding_themes() {
-        foreach ($this -> features as $feature => $arg) {         
+        /**
+         * Array of themes we want to add to wordpress
+         * "string $features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
+         */
+        $features = array(
+            'custom-logo' => array(),
+            'title-tag' => array(),
+            'widgets' => array()
+        );
+
+        /**
+        * loop through the args to activate theme supports
+        */
+        foreach ($features as $feature => $arg) {         
             add_theme_support($feature, $arg);
         }
     }
+
+    /**
+     * This function enables and register nav menu locations for a theme
+     */
+    public function register_custom_menus() {
+        /**
+         * Array of nav menu locations, add custom menus here
+         */
+        $location = array(
+            'topnav' => __('Topnav', 'Bookstore'),
+            'footer' => __('Footer', 'Bookstore')
+        );
+
+        register_nav_menus($location);
+    } 
 }

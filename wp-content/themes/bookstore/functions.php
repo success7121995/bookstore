@@ -19,3 +19,9 @@ Register_Scripts_Style::get_instance();
  * Add theme support
  */
 Add_Themes::get_instance();
+
+/**
+ * Custom topnav menu
+ */
+Walker_Topnav::get_instance();
+

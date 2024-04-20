@@ -25,6 +25,7 @@ class Register_Scripts_Style {
         add_action('wp_enqueue_scripts', [$this, 'register_javascript']);
     }
 
+
     /**
      * Register and enqueue stylesheets
      */

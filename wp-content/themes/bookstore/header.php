@@ -40,7 +40,17 @@ wp_head();
                     <i class="bi bi-list"></i>
                 </button>
             </div>
-            <ul id="navbar-nav" class="navbar-nav">
+            <?php
+            wp_nav_menu(array(
+                'menu' => 'topnav',
+                'menu_id' => 'navbar-nav',
+                'menu_class' => 'navbar-nav',
+                'container' => 'ul',
+                'theme_location' => 'primary',
+                'walker' => new Walker_Topnav
+            ));
+            ?>
+            <!-- <ul id="navbar-nav" class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
                 </li>    
@@ -60,32 +70,6 @@ wp_head();
                         </div>
                     </ul>
                 </li>    
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggler" href="#">Home</a>
-                    <ul class="dropdown-menu">  
-                        <div class="dropdown-grid">
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>    
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                    <ul></ul>
-                </li>    
-            </ul>
+            </ul> -->
         </div>
     </nav>
