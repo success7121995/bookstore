@@ -47,35 +47,39 @@ wp_head();
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggler" href="#">Home</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
+                        <div class="dropdown-grid">
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                        </div>
                     </ul>
                 </li>    
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggler" href="#">Home</a>
                     <ul class="dropdown-menu">  
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a class="dropdown-link" href="#">Test</a>
-                        </li>
+                        <div class="dropdown-grid">
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="dropdown-link" href="#">Test</a>
+                            </li>
+                        </div>
                     </ul>
                 </li>    
                 <li class="nav-item">

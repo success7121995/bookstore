@@ -188,6 +188,8 @@ button {
     .dropdown-menu {
         display: none;
         background: #2f3a58;
+        overflow: hidden;
+        transition: max-height 0.2s;
     }
 
     .dropdown-link {
@@ -202,20 +204,27 @@ button {
 
     @media (min-width: 768px) {
         .dropdown-menu {
-            display: none;
-            grid-template-columns: repeat(4, 1fr);
             text-align: center;
             width: 100%;
             position: absolute;
             left:0;
         }
 
+        .dropdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
         .dropdown-item {
-            /* width:50px; */
+            padding: 20px 0;
         }
 
         .dropdown-link {
             display: inline;
             padding: 10px 0;
+        }
+
+        .dropdown-link:hover {
+            background: none;
         }
     }

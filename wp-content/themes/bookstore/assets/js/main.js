@@ -15,15 +15,17 @@ $(document).ready(() => {
     });
 
      
-    // Toggle dropdown menu in navbar nav in mobile view
+    // Toggle dropdown menu in navbar nav
     $('.dropdown-toggler').click(function(e) {
         e.preventDefault();
 
-        // this code snippet toggles the next sibling that must be a dropdown menu.
-        const dropdownMenu = $(this).next();
+        const targetDropdownMenu = $(this).next();
+        const dropdownMenu = $('.dropdown-menu');
+        
+        // This code snippet toggles the dropdown menu that is next to the dropdown toggler.
+        targetDropdownMenu.slideToggle(200);
 
-        $(window).width() > 767?
-            dropdownMenu.slideToggle(200).css({ display: 'grid' }):
-            dropdownMenu.slideToggle().css({ display: 'block'});
+        // Only one dropdown menu would expand in a time.
+        dropdownMenu.not(targetDropdownMenu).slideUp(200);
     });
 });
