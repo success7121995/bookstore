@@ -4,7 +4,7 @@
  * 
  * @package Bookstore
  * 
- * This class is used to Registers theme support for a given feature.
+ * This class is used to registers theme support for a given feature.
  * Menu registration is also included.
  */
 class Add_Themes {
@@ -14,7 +14,7 @@ class Add_Themes {
     use Singleton;
 
     /**
-     * The __construct function is set to private since it is not allowed to instantiate in in public.
+     * The __construct function is set to private since it is not allowed to instantiate in the public.
      */
     private function __construct() {
         /**
@@ -26,7 +26,7 @@ class Add_Themes {
 
     public function adding_themes() {
         /**
-         * Array of themes we want to add to wordpress
+         * Array of themes that we want to add to wordpress
          * "string $features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
          */
         $features = array(
