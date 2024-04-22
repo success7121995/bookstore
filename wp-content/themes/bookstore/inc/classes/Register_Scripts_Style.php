@@ -30,11 +30,10 @@ class Register_Scripts_Style {
      * Register and enqueue stylesheets
      */
     public function register_stylesheet() {
+        
         /**
          * Register stylesheets
          */
-        
-
         wp_register_style('font-Gupter', 'https://fonts.googleapis.com/css2?family=Gupter:wght@400;500;700&display=swap'); // Bootstrap Icons
         wp_register_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', array(),  '1.11.3', 'all'); // Bootstrap Icons
         wp_register_style('bookstore-main-style', get_stylesheet_uri(), array('bootstrap-icons'), '1.0.0', 'all'); // Main CSS
@@ -48,6 +47,7 @@ class Register_Scripts_Style {
     }   
 
     public function register_javascript() {
+        
         /**
          * Register script
          */

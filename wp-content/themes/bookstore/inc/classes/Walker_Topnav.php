@@ -26,47 +26,61 @@ class Walker_Topnav extends Walker_Nav_Menu {
         $indent = str_repeat("\t", $depth);
 
         /**
-         * Append all preset $item classes to a class array
+         * Create 'li' and 'a' class array to iterate classes to class attribute.
          */
-        $li_classes = empty($item -> classes) ? array() : array($item -> classes);
-
-        /**
-         * This array is created for storing classes for 'a' tag.
-         */
+        $li_classes = array();
         $a_classes = array();
 
+
         /**
-         * 
+         * Check if there is at least one menu item declared.
          */
-        if (!$args -> walker -> has_children):
-             
-        endif;
+        if (!empty($item->classes)) {
+            $li_classes = $item->classes;
 
-        $classes[] = !$args -> walker -> has_children ?
-            'nav-item':
-            array_push($classes, 'nav-item', 'dropdown');
+            /**
+             * Append 'menu-' . $item->ID and 'nav-item' to the 'li' classes array
+             */
+            $li_classes[] = 'menu-' . $item->ID;
+            $li_classes[] = 'nav-item';
 
-        // $paramlink_classes = array('nav-link', '')
+            /**
+             * Append 'nav-link' to hhe 'a' classes array
+             */
+            $a_classes[] = 'nav-link';
 
-
-
-
+            /**
+             * if the menu has a sub-menu, also append 'dropdown-toggler' to the array
+             */
+            if ($args->walker->has_children) {
+                $a_classes[] = 'dropdown-toggler';
+            }
+        }
         
+        /**
+         * Implode the array elements to strings.
+         */
+        $li_classes_str = implode(' ', $li_classes);
+        $a_classes_str = implode(' ', $a_classes);
 
-        // if (!$args -> walker -> has_children):
-        //     $output .= "\n" . $indent . '<li class="nav-item">';
-        //     $output .= "\n" . $indent . '<a class="nav-link" href="' . $item -> url . '">' . $item -> title . '</a>';
-        // else:
-        //     $output .= "\n" . $indent . '<li class="nav-item">';
-        //     $output .= "\n" . $indent . '<a class="nav-link dropdown-toggler" href="' . $item -> url . '">' . $item -> title . '</a>';
-        // endif;
+        /**
+         * Sturcture, assuming that the menu has submenu
+         * <li class="menu-item menu-item-type-post_type menu-item-object-page menu-79 nav-item">
+         *      <a class="nav-link dropdown-toggler">Item</a>
+         * </li>
+         */
+        $output .= "\n" . $indent . '<li class="' . $li_classes_str . '">'; 
+        $output .= "\n" . $indent .'<a class="' . $a_classes_str . '" href="' . $item -> url . '">' . $item -> title . '</a>';
     }
 
     public function start_lvl(&$output, $depth = 0, $args = array(), $id = 0) {
         $indent = str_repeat("\t", $depth);
 
-        $output .= "\n" . $indent . '<div class="dropdown-menu">';
-        $output .= "\n" . $indent . '<ul class="dropdown-grid">';
+        /**
+         * Submenu's Structure
+         */
+        $output .= "\n" . $indent . '<div class="submenu dropdown-menu">';
+        $output .= "\n" . $indent . '<ul class="dropdown">';
     }
 
 }

@@ -50,26 +50,5 @@ wp_head();
                 'walker' => new Walker_Topnav
             ));
             ?>
-            <!-- <ul id="navbar-nav" class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>    
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggler" href="#">Home</a>
-                    <ul class="dropdown-menu">
-                        <div class="dropdown-grid">
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="dropdown-link" href="#">Test</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>    
-            </ul> -->
         </div>
     </nav>
