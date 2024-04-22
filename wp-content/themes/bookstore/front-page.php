@@ -6,7 +6,8 @@
  */
 get_header();
 ?>
-<div class="container">
+
+<div class="container main-content">
     <?php
     /**
      * iterate posts to the home page

@@ -5,8 +5,16 @@
  * @package Bookstore
  * 
  */
-wp_head();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php wp_head(); ?>
+    <title><?php echo get_the_title(); ?></title>
+</head>
+<body>
     <!-- Topnav Header -->
     <nav id="topnav-header">
         <div class="navbar container">
@@ -29,7 +37,7 @@ wp_head();
              */
             echo get_custom_logo('navbar-brand');
             ?>
-            <form class="search-form">
+            <form id="search-box" class="search-form">
                 <input type="text">
                 <button><i class="bi bi-search"></i></button>
             </form>
