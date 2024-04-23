@@ -54,7 +54,6 @@
                 'menu_id' => 'navbar-nav',
                 'menu_class' => 'navbar-nav',
                 'container' => 'ul',
-                'theme_location' => 'primary',
                 'walker' => new Walker_Topnav
             ));
             ?>

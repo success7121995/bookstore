@@ -1,4 +1,3 @@
-console.log('hi');
 $(document).ready(() => {
     
     // Toggle navbar nav in mobile view

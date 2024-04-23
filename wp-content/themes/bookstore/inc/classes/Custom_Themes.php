@@ -1,13 +1,13 @@
 <?php
 /**
- * Add_Theme_Support
+ * Custom_Themes
  * 
  * @package Bookstore
  * 
  * This class is used to registers theme support for a given feature.
  * Menu registration is also included.
  */
-class Add_Themes {
+class Custom_Themes {
     /**
      * Prevent from multiple instantiations
      */
@@ -52,7 +52,11 @@ class Add_Themes {
          */
         $location = array(
             'topnav' => __('Topnav', 'Bookstore'),
-            'footer' => __('Footer', 'Bookstore')
+            'get-to-know-us' => __('Get To Know Us', 'Bookstore'),
+            'help' => __('Help', 'Bookstore'),
+            'legal' => __('Legal', 'Bookstore'),
+            'follow-us' => __('follow Us', 'Bookstore'),
+            'payment-methods' => __('Payment Methods', 'Bookstore'),
         );
 
         register_nav_menus($location);

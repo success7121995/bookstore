@@ -33,44 +33,52 @@ class Walker_Topnav extends Walker_Nav_Menu {
 
 
         /**
-         * Check if there is at least one menu item declared.
+         * To maintain the layout consistency, only one level of submenu is allowed.
+         * If the $depth exceeds 2, it indicates that a second level submenu is registered, which will not be displayed.
          */
-        if (!empty($item->classes)) {
-            $li_classes = $item->classes;
+        if ($depth < 2):
 
             /**
-             * Append 'menu-' . $item->ID and 'nav-item' to the 'li' classes array
+             * Check if there is at least one menu item registered.
              */
-            $li_classes[] = 'menu-' . $item->ID;
-            $li_classes[] = 'nav-item';
+            if (!empty($item->classes)):
+                $li_classes = $item->classes;
 
-            /**
-             * Append 'nav-link' to hhe 'a' classes array
-             */
-            $a_classes[] = 'nav-link';
+                /**
+                 * Append 'menu-' . $item->ID and 'nav-item' to the 'li' classes array
+                 */
+                $li_classes[] = 'menu-' . $item->ID;
+                $li_classes[] = 'nav-item';
 
-            /**
-             * if the menu has a sub-menu, also append 'dropdown-toggler' to the array
-             */
-            if ($args->walker->has_children) {
-                $a_classes[] = 'dropdown-toggler';
-            }
-        }
-        
-        /**
-         * Implode the array elements to strings.
-         */
-        $li_classes_str = implode(' ', $li_classes);
-        $a_classes_str = implode(' ', $a_classes);
+                /**
+                 * Append 'nav-link' to hhe 'a' classes array
+                 */
+                $a_classes[] = 'nav-link';
 
-        /**
-         * Sturcture, assuming that the menu has submenu
-         * <li class="menu-item menu-item-type-post_type menu-item-object-page menu-79 nav-item">
-         *      <a class="nav-link dropdown-toggler">Item</a>
-         * </li>
-         */
-        $output .= "\n" . $indent . '<li class="' . $li_classes_str . '">'; 
-        $output .= "\n" . $indent .'<a class="' . $a_classes_str . '" href="' . $item -> url . '">' . $item -> title . '</a>';
+                /**
+                 * if the menu has a sub-menu, also append 'dropdown-toggler' to the array
+                 */
+                if ($args->walker->has_children):
+                    $a_classes[] = 'dropdown-toggler';
+                endif;
+
+                /**
+                 * Implode the array elements to strings.
+                 */
+                $li_classes_str = implode(' ', $li_classes);
+                $a_classes_str = implode(' ', $a_classes);
+
+                /**
+                 * Sturcture, assuming that the menu has submenu
+                 * <li class="menu-item menu-item-type-post_type menu-item-object-page menu-79 nav-item">
+                 *      <a class="nav-link dropdown-toggler">Item</a>
+                 * </li>
+                 */
+                $output .= "\n" . $indent . '<li class="' . $li_classes_str . '">'; 
+                $output .= "\n" . $indent .'<a class="' . $a_classes_str . '" href="' . $item -> url . '">' . $item -> title . '</a>';
+                
+            endif;
+        endif;
     }
 
     public function start_lvl(&$output, $depth = 0, $args = array(), $id = 0) {
