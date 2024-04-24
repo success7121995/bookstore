@@ -74,7 +74,7 @@
         </div>
         <div id="second-footer" class="second-footer">
             <div class="container">
-                <p>Copyright &copy; <?php echo date('Y'); ?>. All Rights Reserved</p>
+                <p>Copyright &copy; <?php echo esc_html_e(date('Y')); ?>. All Rights Reserved</p>
             </div>
         </div>
     </footer>

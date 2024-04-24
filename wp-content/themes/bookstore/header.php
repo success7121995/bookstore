@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
-    <title><?php get_the_title(); ?></title>
+    <title><?php esc_html_e(get_the_title()); ?></title>
 </head>
 <body>
 

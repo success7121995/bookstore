@@ -29,3 +29,13 @@ Walker_Topnav::get_instance();
  * Custom vertical footer menu
  */
 Walker_Footer::get_instance();
+
+/**
+ * Query posts then format to shortcode for embeding the posts to the webpage's block.
+ */
+Post_Queries::get_instance();
+
+/**
+ * Register post types (This class must be called after the Custom_themes)
+ */
+Custom_Post_Types::get_instance();
