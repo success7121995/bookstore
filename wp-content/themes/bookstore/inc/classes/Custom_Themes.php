@@ -60,5 +60,5 @@ class Custom_Themes {
         );
 
         register_nav_menus($location);
-    } 
+    }
 }
