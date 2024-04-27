@@ -33,7 +33,7 @@ Walker_Footer::get_instance();
 /**
  * Query posts then format to shortcode for embeding the posts to the webpage's block.
  */
-Post_Queries::get_instance();
+Post_Queries_Card::get_instance();
 
 /**
  * Register post types (This class must be called after the Custom_themes)

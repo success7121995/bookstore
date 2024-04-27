@@ -306,38 +306,38 @@ button {
 
 /* Card */
 
-.card {
+.card.book {
     width: 125px;
     border: 1px solid var(--var-divider-color);
 }
 
-.card-heading, .card-body {
+.card.book .card-heading, .card-body {
     width: 80%;
     margin: auto;
 }
 
     /* Card Heading */
-    .card-heading {
+    .card.book .card-heading {
         text-align: center;
         padding-top: 10px;
         padding-bottom: 2px;
     }
 
-    .card-thumbnail {
+    .card.book .card-thumbnail {
         width: 100px;
         height: 150px;
     }
 
     /* Card Body */
-    .card-body {
+    .card.book .card-body {
         margin-bottom: 8px;
     }
 
-    .card-body .card-box {
+    .card.book .card-body .card-box {
         margin: 3px 0;
     }
 
-    .card-title {
+    .card.book .card-title {
         color: var(--var-primary-color);
         display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
         -webkit-box-orient: vertical;
@@ -346,17 +346,22 @@ button {
         overflow: hidden;
     }
 
-    .card-tags {
+    .card.book .card-tags {
         color: var(--var-divider-color);
         font-size: 8px;
     }
 
-    .card-rate * {
+    .card.book .card-rate * {
         color: var(--var-divider-color);
         font-size: 8px;
     }
 
-    .card-body button.add-to-cart {
+    .card.book .card-price {
+        color: var(--var-text-dark-color);
+        font-size: 13px;
+    }
+    
+    .card.book .card-body button.add-to-cart {
         color: var(--var-text-light-color);
         background: var(--var-tertiary-color);
         text-transform: uppercase;
