@@ -35,7 +35,7 @@ class Custom_Post_Types {
                 'public' => true,
                 'has_archive' => true,
                 'rewrite' => array(
-                    'slug' => '%category%',
+                    'slug' => 'books',
                 ),
                 'menu_icon' => 'dashicons-book',
                 'show_in_rest' => true, // Switch to block editor

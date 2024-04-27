@@ -190,6 +190,7 @@ button {
         color: var(--var-text-light-color);
         width: 100%;
         padding: 10px;
+        text-transform: uppercase;
     }
 
     #topnav-nav .nav-link:hover {
@@ -243,6 +244,7 @@ button {
         display: block;
         color: var(--var-text-light-color) !important;
         padding: 10px 40px;
+        text-transform: capitalize !important;
     }
 
     .dropdown .nav-link:hover {
@@ -301,6 +303,66 @@ button {
 .main-content {
     margin: 20px auto;
 }
+
+/* Card */
+
+.card {
+    width: 125px;
+    border: 1px solid var(--var-divider-color);
+}
+
+.card-heading, .card-body {
+    width: 80%;
+    margin: auto;
+}
+
+    /* Card Heading */
+    .card-heading {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 2px;
+    }
+
+    .card-thumbnail {
+        width: 100px;
+        height: 150px;
+    }
+
+    /* Card Body */
+    .card-body {
+        margin-bottom: 8px;
+    }
+
+    .card-body .card-box {
+        margin: 3px 0;
+    }
+
+    .card-title {
+        color: var(--var-primary-color);
+        display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .card-tags {
+        color: var(--var-divider-color);
+        font-size: 8px;
+    }
+
+    .card-rate * {
+        color: var(--var-divider-color);
+        font-size: 8px;
+    }
+
+    .card-body button.add-to-cart {
+        color: var(--var-text-light-color);
+        background: var(--var-tertiary-color);
+        text-transform: uppercase;
+        width: 100%; /* Full width of card body */
+        padding: 3px 0;
+    }
 
 /* Footer */
 footer * {
