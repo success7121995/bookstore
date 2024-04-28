@@ -38,7 +38,6 @@ class Custom_Post_Types {
                     'slug' => 'books',
                 ),
                 'menu_icon' => 'dashicons-book',
-                'show_in_rest' => true, // Switch to block editor
                 'hierarchical' => true
             )
         );

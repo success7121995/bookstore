@@ -13,7 +13,6 @@ $(document).ready(() => {
             targetNav.slideToggle(200);
         }
     });
-
      
     // Toggle dropdown menu in navbar nav
     $('.dropdown-toggler').click(function(e) {
@@ -27,5 +26,13 @@ $(document).ready(() => {
 
         // Only one dropdown menu would expand in a time.
         dropdownMenu.not(targetDropdownMenu).slideUp(200);
+    });
+
+    // Card Scroller
+
+        // Next button
+    $('.card-wrapper .next-btn').click(function(e) {
+        e.preventDefault();
+        
     });
 });

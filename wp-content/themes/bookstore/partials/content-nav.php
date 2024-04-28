@@ -29,7 +29,7 @@
             ?>
             <form id="search-box" class="search-form">
                 <input type="text">
-                <button><i class="bi bi-search"></i></button>
+                <button id="search-btn"><i class="bi bi-search"></i></button>
             </form>
         </div>
         <div id="topnav-nav">

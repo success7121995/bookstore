@@ -291,7 +291,7 @@ button {
     #search-box {
         text-wrap: nowrap;
         padding: 3px 8px;
-        border: 1px solid var(--var-text-dark-color);
+        border: 1px solid var(--var-divider-color);
     }
 
     #search-box input {
@@ -299,13 +299,39 @@ button {
         outline: none;
     }
 
+    #search-btn .bi-search {
+        color: var(--var-divider-color)
+    }
+
 /* Content */
 .main-content {
     margin: 20px auto;
 }
 
-/* Card */
+/* Card Wrapper */
+.card-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 125px;
+    grid-gap: 10px;
+    overflow-x: hidden;
+    position: relative;
+}
 
+.card-wrapper .pre-btn, .card-wrapper .next-btn {
+    color: var(--var-text-light-color);
+    background: var(--var-text-dark-color);
+    padding: 3px 5px;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+}
+
+.card-wrapper .next-btn {
+    right: 0;
+}
+
+/* Card */
 .card.book {
     width: 125px;
     border: 1px solid var(--var-divider-color);
@@ -313,6 +339,8 @@ button {
 
 .card.book .card-heading, .card-body {
     width: 80%;
+    min-width: 100px;
+    padding: 8px;
     margin: auto;
 }
 
@@ -344,6 +372,7 @@ button {
         -webkit-line-clamp: 2;
         text-overflow: ellipsis;
         overflow: hidden;
+        height: 25px;
     }
 
     .card.book .card-tags {
