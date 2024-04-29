@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    let animationDurtion = 200;
+    const animationDurtion = 200;
     
     // Toggle navbar nav in mobile view
     $('.navbar-toggler').click(function(e) {
@@ -66,7 +66,7 @@ $(document).ready(() => {
     $('.cards .scroll').click(function(e) {
         e.preventDefault();
 
-        animationDurtion = 500;
+        sliderAnimationDurtion = 500;
         
         const cardWrapper = $(this).closest('.cards').find('.card-wrapper');
 
@@ -79,14 +79,14 @@ $(document).ready(() => {
         if ($(this).hasClass('next-btn')) {
             cardWrapper.animate({
                 scrollLeft: cardWrapper.scrollLeft() + scrollAmount
-            }, animationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
+            }, sliderAnimationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
         }
         
         // Previous slide button
         if ($(this).hasClass('prev-btn')) {
             cardWrapper.animate({
                 scrollLeft: cardWrapper.scrollLeft() - scrollAmount
-            }, animationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
+            }, sliderAnimationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
         }
     });
 
