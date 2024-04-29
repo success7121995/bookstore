@@ -177,7 +177,7 @@ button {
         height: auto;
         position: absolute;
         top: 135px;
-        z-index: 9999;
+        z-index: 100;
     }
 
     #topnav-nav .navbar-toggler-wrapper {
@@ -186,11 +186,11 @@ button {
     }
  
     #topnav-nav .nav-link {
+        font-size: 14px;
         display: block;
         color: var(--var-text-light-color);
         width: 100%;
         padding: 10px;
-        text-transform: uppercase;
     }
 
     #topnav-nav .nav-link:hover {
@@ -217,6 +217,7 @@ button {
 
         #topnav-nav .nav-link {
             color: var(--var-primary-color);
+            text-transform: uppercase;
         }
 
         #topnav-nav .nav-link:hover {
@@ -237,14 +238,14 @@ button {
         background: #2f3a58;
         overflow: hidden;
         transition: max-height 0.2s;
-        z-index: 99999;
+        z-index: 100;
     }
 
     .dropdown .nav-link {
         display: block;
         color: var(--var-text-light-color) !important;
-        padding: 10px 40px;
         text-transform: capitalize !important;
+        padding-left: 30px !important; 
     }
 
     .dropdown .nav-link:hover {
@@ -309,31 +310,53 @@ button {
 }
 
 /* Card Wrapper */
-.card-wrapper {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 125px;
-    grid-gap: 10px;
-    overflow-x: hidden;
+.cards {
     position: relative;
 }
 
-.card-wrapper .pre-btn, .card-wrapper .next-btn {
+.card-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 135px;
+    grid-gap: 10px;
+    overflow-x: hidden;
+    position: relative;
+    width: 85%;
+    margin: auto;
+}
+
+.cards .prev-btn, .cards .next-btn {
+    font-size: 12px;
     color: var(--var-text-light-color);
     background: var(--var-text-dark-color);
     padding: 3px 5px;
     border-radius: 100%;
     position: absolute;
-    top: 50%;
+    top: 45%;
+    z-index: 20;
 }
 
-.card-wrapper .next-btn {
+.cards .next-btn {
     right: 0;
+}
+
+@media (min-width: 578px) {
+    .card-wrapper {
+        grid-gap: 15px;
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-wrapper {
+        grid-gap: 20px;
+        width: 92%;
+    }
 }
 
 /* Card */
 .card.book {
-    width: 125px;
+    width: 135px;
     border: 1px solid var(--var-divider-color);
 }
 
@@ -344,6 +367,10 @@ button {
     margin: auto;
 }
 
+.card-body {
+    padding-top: 0;
+}
+
     /* Card Heading */
     .card.book .card-heading {
         text-align: center;
@@ -352,7 +379,7 @@ button {
     }
 
     .card.book .card-thumbnail {
-        width: 100px;
+        width: 105px;
         height: 150px;
     }
 
@@ -365,7 +392,7 @@ button {
         margin: 3px 0;
     }
 
-    .card.book .card-title {
+    .card.book .card-title, .card.book .card-tags {
         color: var(--var-primary-color);
         display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
         -webkit-box-orient: vertical;
@@ -378,6 +405,8 @@ button {
     .card.book .card-tags {
         color: var(--var-divider-color);
         font-size: 8px;
+        -webkit-line-clamp: 1;
+        height: 10px;
     }
 
     .card.book .card-rate * {

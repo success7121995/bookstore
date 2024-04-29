@@ -19,13 +19,28 @@ class Post_Queries_Card {
      */
     private function __construct() {
         add_shortcode('display_new_releases', [$this, 'display_new_releases']);
+        add_shortcode('display_recommendations', [$this, 'display_recommendations']);
     }
 
     /**
      *  Display new releases
      */
     public function display_new_releases() {
-        $feature_type = 'new-releases';
+        $feature_type = 'new-release';
+
+        ob_start();
+
+        $this -> feature_post_query($feature_type);
+        
+        wp_reset_postdata();
+        return ob_get_clean();  
+    }
+
+    /**
+     *  Display recommendations
+     */
+    public function display_recommendations() {
+        $feature_type = 'recommendation';
 
         ob_start();
 
@@ -57,44 +72,46 @@ class Post_Queries_Card {
          */
         ?>
 
-        <div class="card-wrapper">
-            <button class="pre-btn"><i class="bi bi-caret-left-fill"></i></button>
-        <?php
+        <div class="cards">
+            <button class="scroll prev-btn"><i class="bi bi-caret-left-fill"></i></button>
+            <div class="card-wrapper">
+            <?php
             while ($query -> have_posts()):
                 $query -> the_post();
 
                 /**
-                 * It returns an array that wrapped WP_Term Object (array[0])
+                 * It returns an array of WP_Term Object
                  */
-                $features = get_field('features') ? get_field('features')[0] : array();
+                $features = get_field('features') ? get_field('features') : array();
 
-                /**
-                 * Display all related books
-                 */
                 if (!empty($features)):
-                    if ($features -> slug === $feature_type):
-                        /**
-                         * Set $found_related to true means that related book is found
-                         */
-                        $found_related = true;
-                        $this -> card_html_structure($query);
-                    endif;
+                    foreach ($features as $feature):
+                        if ($feature -> slug === $feature_type):
+
+                            /**
+                             * 
+                             */
+                            $found_related = true;
+                            $this -> card_html_structure($query);
+                        endif;
+                    endforeach;
                 endif;
             endwhile;
+            ?>
+                
+            </div>
+            <button class="scroll next-btn"><i class="bi bi-caret-right-fill"></i></button>
+        </div>
 
+            <?php
             /**
              * If $found_related remains false, displays 'No result found'
              */
             if ($found_related === false):
-                echo wp_kses_post('<h2 class="not-found-display">Oop! No new book released yet!</h2>');
-            endif;
-        ?>
-            <button class="next-btn"><i class="bi bi-caret-right-fill"></i></button>
-        </div>
-
-        <?php
+                echo wp_kses_post('<h2 class="not-found-display">Oop! No ' . str_replace('-', ' ', $feature_type) . ' yet!</h2>');
+            endif; 
         else:
-            echo wp_kses_post('<h2 class="not-found-display">Oop! No new book released yet!</h2>');
+            echo wp_kses_post('<h2 class="not-found-display">Oop! No ' . str_replace('-', ' ', $feature_type) . ' yet!</h2>');
         endif;
 
     } 

@@ -28,11 +28,41 @@ $(document).ready(() => {
         dropdownMenu.not(targetDropdownMenu).slideUp(200);
     });
 
-    // Card Scroller
+    // Collapse menu while clicking outside
+    $(document).on('click', function(e) {
+        e.stopPropagation();
 
-        // Next button
-    $('.card-wrapper .next-btn').click(function(e) {
+        if ($('.dropdown-menu').is(':visible')) {
+
+            if ($(e.target).hasClass('dropdown-menu')) {
+                
+                $('.dropdown-menu').slideUp(200);
+            }
+        }
+
+    });
+
+    // Card Slider
+    $('.cards .scroll').click(function(e) {
         e.preventDefault();
         
+        const cardWrapper = $(this).closest('.cards').find('.card-wrapper');
+
+        // This amount represents the pixal of movement, positve number means slide to the left, in constract means to the right.
+        const scrollAmount = 400;
+        
+        // Next slide button
+        if ($(this).hasClass('next-btn')) {
+            cardWrapper.animate({
+                scrollLeft: cardWrapper.scrollLeft() + scrollAmoun
+            }, 500);
+        }
+        
+        // Previous slide button
+        if ($(this).hasClass('prev-btn')) {
+            cardWrapper.animate({
+                scrollLeft: cardWrapper.scrollLeft() - scrollAmount
+            }, 500);
+        }
     });
-});
+}); 

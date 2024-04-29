@@ -31,7 +31,6 @@ class Walker_Topnav extends Walker_Nav_Menu {
         $li_classes = array();
         $a_classes = array();
 
-
         /**
          * To maintain the layout consistency, only one level of submenu is allowed.
          * If the $depth exceeds 2, it indicates that a second level submenu is registered, which will not be displayed.
