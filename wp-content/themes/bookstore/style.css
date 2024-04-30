@@ -100,8 +100,15 @@ li {
         color: var(--var-divider-color);
     }
 
+    /* Book Title*/
+    h4 {    
+        font-size: 14px;
+        color: var(--var-accent-color);
+        font-weight: 500;
+    }
+
     /* Body Font */
-    a, p, span, button, ul, li, input, textarea {    
+    a, p, span, button, ul, li, input, textarea, h2, h4 {    
         font-family: var(--var-body-font);
     }
 
@@ -116,6 +123,14 @@ button {
     outline: none;
     background: none;
     cursor: pointer;
+}
+
+button.add-to-cart {
+    color: var(--var-text-light-color);
+    background: var(--var-tertiary-color);
+    text-transform: uppercase;
+    width: 100%; /* Full width of card body */
+    padding: 3px 0;
 }
 
 /* Navbar */
@@ -309,6 +324,53 @@ button {
     margin: 20px auto;
 }
 
+/* Single Book */
+
+    /* Single Book Heading */
+    .single-book .single-heading {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-gap: 1px;
+    }
+
+    .single-book .single-thumbnail {
+        width: 130px;
+        height: 180px;
+    }
+
+    .single-book .single-heading-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .single-book .single-author {
+        color: var(--var-text-dark-color);
+        font-size: 13px;
+    }
+
+    .single-book .single-tags {
+        color: var(--var-divider-color);
+        font-size: 11px;
+    }
+
+    .single-book .single-price {
+        color: var(--var-accent-color);
+        font-size: 18px;
+    }
+
+    .single-book .single-rate {
+        color: var(--var-divider-color);
+        font-size: 13px;
+    }
+
+    /* Single Button Group */
+    .single-book .btn-group i {
+        color: var(--var-divider-color);
+        font-size: 20px;
+        margin-right: 15px;
+    }
+
 /* Card Wrapper */
 .cards {
     position: relative;
@@ -417,14 +479,6 @@ button {
     .card.book .card-price {
         color: var(--var-text-dark-color);
         font-size: 13px;
-    }
-    
-    .card.book .card-body button.add-to-cart {
-        color: var(--var-text-light-color);
-        background: var(--var-tertiary-color);
-        text-transform: uppercase;
-        width: 100%; /* Full width of card body */
-        padding: 3px 0;
     }
 
 /* Footer */

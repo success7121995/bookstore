@@ -19,6 +19,7 @@ class Custom_Post_Types {
      */
     private function __construct() {
         add_action('init', [$this, 'custom_post_type']);
+        add_action('admin_init', [$this, 'custom_post_type_support']);
     }
 
     public function custom_post_type() {
@@ -41,5 +42,11 @@ class Custom_Post_Types {
                 'hierarchical' => true
             )
         );
+    }
+
+    public function custom_post_type_support() {
+        add_post_type_support('books', array(
+            'page-attributes'
+        ));
     }
 } 

@@ -1,6 +1,8 @@
 <?php
 /**
- * Index
+ * Page
+ * 
+ * All parent pages will display here
  * 
  * @package Bookstore
  */
@@ -9,7 +11,7 @@ get_header();
 <div class="container">
     <?php
     /**
-     * iterate posts to the index page
+     * iterate posts to the post page
      */
     if (have_posts()):
         while(have_posts()):
