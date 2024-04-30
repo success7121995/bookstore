@@ -20,13 +20,13 @@ $field = get_fields($id);
 
 <div class="single-heading">
     <img class="single-thumbnail" src="<?php echo $field['image']['url']; ?>" alt="<?php echo $field['title']; ?>">
-    <div class="single-heading-content">
+    <div style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
             <h4 class="single-title"><?php echo $field['title']; ?></h4>
             <p class="single-author">By <?php echo $field['author']; ?></p>
             <p class="single-tags"><?php echo $field['tags']; ?></p>
         </div>
-        <div>
+        <div class="single-heading-content-container">
             <div>
                 <div class="btn-group">
                     <a href="#"><i class="bi bi-heart"></i></a>
@@ -84,10 +84,13 @@ $field = get_fields($id);
                 ?>
                 </div>
             </div>
-            <button class="add-to-cart">Add to Cart</button>
+            <div style="">
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
         </div>
     </div>
 </div>
 <div class="single-body">
-    <h3>Single Body</h3>
+    <h3>Description</h3>
+    <article><?php echo $field['description']; ?></article>
 </div>

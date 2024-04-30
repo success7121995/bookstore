@@ -23,6 +23,7 @@ get_header();
     if (!is_home() && !is_front_page()):
         if ($query -> have_posts()):
             $query -> the_post();
+            
             /**
              * Pass through the query to the template
              */

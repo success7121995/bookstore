@@ -22,8 +22,8 @@ Requires PHP: 7.4
     --var-divider-color: #cecece;
 
     /* Font Families */
-    --var-heading-font: "Tinos", serif;
-    --var-body-font: "Open Sans", sans-serif;
+    --var-tinos-font: "Tinos", serif;
+    --var-open-sans-font: "Open Sans", sans-serif;
 
 }
 
@@ -64,12 +64,24 @@ li {
 }
 
     /* Heading Font */
-    h1, h2, h3, h5, h6 {
-        font-family: var(--var-heading-font); 
+    h1 {
+        font-family: var(--var-tinos-font); 
+        font-weight: 500;
+    }
+
+    h2, h3, h4 {
+        font-family: var(--var-open-sans-font);
+        color: var(--var-accent-color);
+        font-weight: 500;
+    }
+
+    h3 {
+        font-weight: 600;
     }
     
     /* Heading with divider */
     h3.wp-block-heading {
+        font-family: var(--var-tinos-font);
         display: flex;
         align-items: center;
         padding: 20px 0;
@@ -77,6 +89,7 @@ li {
     }
 
     h3.wp-block-heading::before, h3.wp-block-heading::after {
+        font-size: var(--var-tinos-font);
         flex: 1;
         content: '';
         padding: 0.5px;
@@ -93,23 +106,22 @@ li {
 
     /* Not found */
     h2.not-found-display {
-        font-family: var(--var-body-font);
+        font-family: var(--var-open-sans-font);
         font-weight: 400;
         text-align: center;
         text-transform: capitalize;
         color: var(--var-divider-color);
     }
 
-    /* Book Title*/
-    h4 {    
-        font-size: 14px;
-        color: var(--var-accent-color);
-        font-weight: 500;
+    /* Body Font */
+    a, p, span, button, ul, li, input, textarea, article {    
+        font-family: var(--var-open-sans-font);
     }
 
-    /* Body Font */
-    a, p, span, button, ul, li, input, textarea, h2, h4 {    
-        font-family: var(--var-body-font);
+    article {
+        color: var(--var-text-dark-color);
+        font-size: 12px;
+        line-height: 1.7;
     }
 
     /* body font color */
@@ -129,7 +141,7 @@ button.add-to-cart {
     color: var(--var-text-light-color);
     background: var(--var-tertiary-color);
     text-transform: uppercase;
-    width: 100%; /* Full width of card body */
+    width: 100%; /* Full width of element body */
     padding: 3px 0;
 }
 
@@ -330,18 +342,10 @@ button.add-to-cart {
     .single-book .single-heading {
         display: grid;
         grid-template-columns: 40% 60%;
-        grid-gap: 1px;
     }
 
     .single-book .single-thumbnail {
-        width: 130px;
-        height: 180px;
-    }
-
-    .single-book .single-heading-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        width: 90%;
     }
 
     .single-book .single-author {
@@ -354,6 +358,13 @@ button.add-to-cart {
         font-size: 11px;
     }
 
+    /* Single Book Heading container */
+    .single-book .single-heading-content-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+
     .single-book .single-price {
         color: var(--var-accent-color);
         font-size: 18px;
@@ -364,11 +375,19 @@ button.add-to-cart {
         font-size: 13px;
     }
 
+    .single-book button.add-to-cart {
+        padding: 5px 7px;   
+    }
     /* Single Button Group */
     .single-book .btn-group i {
         color: var(--var-divider-color);
         font-size: 20px;
         margin-right: 15px;
+    }
+
+    /* Single Body */
+    .single-body {
+        margin-top: 15px;
     }
 
 /* Card Wrapper */
@@ -461,7 +480,7 @@ button.add-to-cart {
         -webkit-line-clamp: 2;
         text-overflow: ellipsis;
         overflow: hidden;
-        height: 25px;
+        height: 30px;
     }
 
     .card.book .card-tags {
