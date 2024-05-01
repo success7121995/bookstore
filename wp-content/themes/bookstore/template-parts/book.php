@@ -16,15 +16,17 @@ $query = isset($args['query']) ? $args['query'] : null;
 $id = $query -> post -> ID;
 $field = get_fields($id);
 
+$genre = get_field('genre');
 ?>
 
 <div class="single-heading">
-    <img class="single-thumbnail" src="<?php echo $field['image']['url']; ?>" alt="<?php echo $field['title']; ?>">
+    <img class="single-thumbnail" src="<?php echo wp_kses_post($field['image']['url']); ?>" alt="<?php echo wp_kses_post($field['title']); ?>">
     <div style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-            <h4 class="single-title"><?php echo $field['title']; ?></h4>
-            <p class="single-author">By <?php echo $field['author']; ?></p>
-            <p class="single-tags"><?php echo $field['tags']; ?></p>
+            <h4 class="single-title single-box"><?php echo wp_kses_post($field['title']); ?></h4>
+            <p class="single-author single-box">By <?php echo wp_kses_post($field['author']); ?></p>
+            <p class="single-tags single-box"><?php echo wp_kses_post($genre -> name); ?></p>
+            <p class="single-isbn single-box">ISBN: <?php echo wp_kses_post($field['isbn']); ?></p>
         </div>
         <div class="single-heading-content-container">
             <div>
@@ -52,7 +54,7 @@ $field = get_fields($id);
                     $decimal_point = $digits[1]; 
                 endif;
 
-                echo '$' . $digits[0] . '.<span style="font-size: 12px;">' . $decimal_point . '</span>';
+                echo '$' . wp_kses_post($digits[0]) . '.<span class="single-decimal">' . wp_kses_post($decimal_point) . '</span>';
                 ?>
                 </p>
                 <div class="single-rate">
@@ -84,7 +86,7 @@ $field = get_fields($id);
                 ?>
                 </div>
             </div>
-            <div style="">
+            <div>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
         </div>
@@ -92,5 +94,5 @@ $field = get_fields($id);
 </div>
 <div class="single-body">
     <h3>Description</h3>
-    <article><?php echo $field['description']; ?></article>
+    <article><?php the_content(); ?></article>
 </div>

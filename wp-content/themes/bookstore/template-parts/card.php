@@ -6,11 +6,14 @@
  */
 
 /**
-* Check if $query and $feature_type have been set
+* Check if $query, $feature_type and $genre have been set
 */
 $query = isset($args['query']) ? $args['query'] : null;
 $feature_type = isset($args['feature_type']) ? $args['feature_type'] : null;
 
+/**
+ * Set to false to indicate that no related element is found 
+ */
 $found_related = false;
 ?>
 
@@ -25,13 +28,24 @@ $found_related = false;
          * It returns an array of WP_Term Object
          */
         $features = get_field('features') ? get_field('features') : array();
+        $genre = get_field('genre');
 
         if (!empty($features)):
             foreach ($features as $feature):
+
+                /**
+                 * Check if the book is a related feature
+                 */
                 if ($feature -> slug === $feature_type):
 
+                    /**
+                     * Indicate that a related feature is found
+                     */
                     $found_related = true;
                     
+                    /**
+                     * Get ACF fields
+                     */
                     $fields = get_fields();
                     ?>
                     <a href="<?php echo wp_kses_post(get_permalink($query-> post -> ID)); ?>">
@@ -42,7 +56,7 @@ $found_related = false;
                             <div class="card-body">
                                 <h6 class="card-title card-box"><?php echo wp_kses_post($fields['title']); ?></h6>
                                 <div class="card-content">
-                                    <p class="card-tags card-box"><?php echo wp_kses_post($fields['tags']); ?></p>
+                                    <p class="card-tags card-box"><?php echo wp_kses_post($genre -> name); ?></p>
                                     <div class="card-rate card-box">
                                         <?php
                                         /**
@@ -96,7 +110,7 @@ $found_related = false;
                                         $decimal_point = $digits[1]; 
                                     endif;
             
-                                    echo '$' . wp_kses_post($digits[0]) . '.<span style="font-size: 10px;">' . wp_kses_post($decimal_point) . '</span>';
+                                    echo '$' . wp_kses_post($digits[0]) . '.<span class="card-decimal">' . wp_kses_post($decimal_point) . '</span>';
                                     ?>
                                     </p>
                                 </div>

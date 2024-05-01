@@ -22,6 +22,7 @@ class Custom_Themes {
          */
         add_action('after_setup_theme', [$this, 'adding_themes']);
         add_action('after_setup_theme', [$this, 'register_custom_menus']);
+        add_action('after_setup_theme', [$this, 'register_custom_widgets']);
     }
 
     public function adding_themes() {
@@ -60,5 +61,16 @@ class Custom_Themes {
         );
 
         register_nav_menus($location);
+    }
+
+    /**
+     * This function enables and register custom widgets including sidebar
+     */
+    public function register_custom_widgets() {
+        register_sidebar(array(
+            'name'          => 'Category Sidebar',
+            'id'            => 'category-sidebar',
+            'class'         => '',
+        ));
     }
 }

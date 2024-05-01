@@ -17,20 +17,30 @@ $query = new WP_Query(array(
 
 get_header();
 ?>
-
-<div class="container single-book">
-    <?php
-    if (!is_home() && !is_front_page()):
-        if ($query -> have_posts()):
-            $query -> the_post();
-            
-            /**
-             * Pass through the query to the template
-             */
-            get_template_part('template-parts/book', null, array('query' => $query));
+<div class="container">
+    <div class="single-book">
+        <?php
+        if (!is_home() && !is_front_page()):
+            if ($query -> have_posts()):
+                $query -> the_post();
+                
+                /**
+                 * Pass through the query to the template
+                 */
+                get_template_part('template-parts/book', null, array('query' => $query));
+            endif;
         endif;
-    endif;
+        ?>
+    </div>
+    <h3 class="wp-block-heading">Recommendations</h3>
+    <div style="margin-bottom: 20px;">
+    <?php
+    /**
+     * Embed recommendations
+     */
+    echo do_shortcode('[display_recommendations]', true)
     ?>
+    </div>
 </div>
 
 <?php

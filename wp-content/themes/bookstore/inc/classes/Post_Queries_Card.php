@@ -20,6 +20,7 @@ class Post_Queries_Card {
     private function __construct() {
         add_shortcode('display_new_releases', [$this, 'display_new_releases']);
         add_shortcode('display_recommendations', [$this, 'display_recommendations']);
+        add_shortcode('display_genre_recommendations', [$this, 'display_genre_recommendations']);
     }
 
     /**
@@ -28,11 +29,21 @@ class Post_Queries_Card {
     public function display_new_releases() {
         $feature_type = 'new-release';
 
+        /**
+         * Buffer starts
+         */
         ob_start();
 
-        $this -> feature_post_query($feature_type);
+        $this -> feature_book_query($feature_type);
         
+        /**
+         * reset query data
+         */
         wp_reset_postdata();
+
+        /**
+         * Buffer ends
+         */
         return ob_get_clean();  
     }
 
@@ -44,7 +55,8 @@ class Post_Queries_Card {
 
         ob_start();
 
-        $this -> feature_post_query($feature_type);
+        $this -> feature_book_query($feature_type);
+
 
         wp_reset_postdata();
         return ob_get_clean();  
@@ -53,7 +65,7 @@ class Post_Queries_Card {
     /**
      * Query featured books
      */
-    private function feature_post_query($feature_type) {
+    private function feature_book_query($feature_type) {
         $query = new WP_Query(array(
             'post_type' => 'books'
         ));
@@ -65,7 +77,7 @@ class Post_Queries_Card {
              */
             get_template_part('template-parts/card', null, array(
                 'query' => $query,
-                'feature_type' => $feature_type
+                'feature_type' => $feature_type,
             ));
 
         else:
