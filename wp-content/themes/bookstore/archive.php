@@ -18,7 +18,7 @@ get_header();
     <?php
     if (!is_home() && !is_front_page()):
         /**
-         * iterate posts to the index page
+         * iterate posts to the archive page
          */
         if (have_posts()):
             while(have_posts()):
