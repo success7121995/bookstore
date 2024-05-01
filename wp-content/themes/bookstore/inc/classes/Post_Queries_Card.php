@@ -26,6 +26,10 @@ class Post_Queries_Card {
      *  Display new releases
      */
     public function display_new_releases() {
+        $query = new WP_Query(array(
+            'post_type' => 'books'
+        ));
+
         $feature_type = 'new-release';
 
         /**
@@ -33,7 +37,7 @@ class Post_Queries_Card {
          */
         ob_start();
 
-        $this -> feature_book_query($feature_type);
+        $this -> feature_book_query($feature_type, $query);
         
         /**
          * reset query data
@@ -50,11 +54,15 @@ class Post_Queries_Card {
      *  Display recommendations
      */
     public function display_recommendations() {
+        $query = new WP_Query(array(
+            'post_type' => 'books'
+        ));
+
         $feature_type = 'recommendation';
 
         ob_start();
 
-        $this -> feature_book_query($feature_type);
+        $this -> feature_book_query($feature_type, $query);
 
 
         wp_reset_postdata();
@@ -64,11 +72,7 @@ class Post_Queries_Card {
     /**
      * Query featured books
      */
-    private function feature_book_query($feature_type) {
-        $query = new WP_Query(array(
-            'post_type' => 'books'
-        ));
-
+    private function feature_book_query($feature_type, $query) {
         if ($query -> have_posts()):
 
             /**

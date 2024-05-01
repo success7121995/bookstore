@@ -8,12 +8,12 @@
  /**
   * Get the query object
   */
-$category = get_queried_object();
-$category_name = $category -> name;
-
 get_header();
 ?>
-<div class="container">
+<div id="archive" class="container main-content">
+    <aside>
+        <?php dynamic_sidebar('category-sidebar'); ?>
+    </aside>
     <h1 class="page-title"><?php echo wp_kses_post($category_name); ?></h1>
     <?php
     if (!is_home() && !is_front_page()):

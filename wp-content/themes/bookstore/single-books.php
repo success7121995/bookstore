@@ -17,7 +17,7 @@ $query = new WP_Query(array(
 
 get_header();
 ?>
-<div class="container">
+<div class="container main-content">
     <div class="single-book">
         <?php
         if (!is_home() && !is_front_page()):

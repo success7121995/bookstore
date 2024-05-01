@@ -31,6 +31,11 @@ Walker_Topnav::get_instance();
 Walker_Footer::get_instance();
 
 /**
+ * Sidebar
+ */
+Custom_Sidebars::get_instance();
+
+/**
  * Query posts then format to shortcode for embeding the posts to the webpage's block.
  */
 Post_Queries_Card::get_instance();

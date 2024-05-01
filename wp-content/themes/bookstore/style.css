@@ -332,8 +332,35 @@ button.add-to-cart {
         color: var(--var-divider-color)
     }
 
+/* Sidenav */
+aside {
+    background: var(--var-text-light-color);
+    height: 100%;
+    border-right: 1px solid var(--var-divider-color);
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    transform: translateX(-20px);
+}
+
+#sidenav .nav-link {
+    display: block;
+    width: 100%;
+    padding: 8px 20px;
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--var-text-dark-color);
+    transition: all 0.1s;
+}
+
+#sidenav .nav-link:hover {
+    background: var(--var-primary-color);
+    color: var(--var-text-light-color);
+}
+
 /* Content */
 .main-content {
+    min-height: 550px;
     margin: 20px auto;
 }
 
@@ -481,6 +508,11 @@ button.add-to-cart {
     .single-body {
         margin-top: 15px;
     }
+
+/* Archive */
+#archive.container {
+    position: relative;
+}
 
 /* Card Wrapper */
 .cards {
@@ -642,7 +674,6 @@ footer .nav-link {
         font-size: 14px;
     }
 }
-
 
     /* Top Footer */
     #top-footer {
