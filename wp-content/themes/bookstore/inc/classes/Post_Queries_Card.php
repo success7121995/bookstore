@@ -20,7 +20,6 @@ class Post_Queries_Card {
     private function __construct() {
         add_shortcode('display_new_releases', [$this, 'display_new_releases']);
         add_shortcode('display_recommendations', [$this, 'display_recommendations']);
-        add_shortcode('display_genre_recommendations', [$this, 'display_genre_recommendations']);
     }
 
     /**

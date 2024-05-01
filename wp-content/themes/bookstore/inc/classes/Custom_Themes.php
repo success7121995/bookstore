@@ -45,7 +45,7 @@ class Custom_Themes {
     }
 
     /**
-     * This function enables and register nav menu locations for a theme
+     * This function enables and registers nav menu locations for a theme
      */
     public function register_custom_menus() {
         /**
@@ -64,7 +64,7 @@ class Custom_Themes {
     }
 
     /**
-     * This function enables and register custom widgets including sidebar
+     * This function enables and registers custom widgets including sidebar
      */
     public function register_custom_widgets() {
         register_sidebar(array(
