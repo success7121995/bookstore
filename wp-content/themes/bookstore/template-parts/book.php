@@ -5,14 +5,10 @@
  * @package Bookstore
  */
 
-/**
- * Check if $query has been set
- */
+// Check if $query has been set
 $query = isset($args['query']) ? $args['query'] : null;
 
-/**
- * Grab the ID from $query and get ACF fields by ID
-*/
+// Grab the ID from $query and get ACF fields by ID
 $id = $query -> post -> ID;
 $field = get_fields($id);
 
@@ -36,21 +32,15 @@ $genre = get_field('genre');
                 </div>
                 <p class="single-price">
                 <?php
-                /**
-                 * Assume that the price is an integer, decimal point will be presented to 00.
-                 */
+                // Assume that the price is an integer, decimal point will be presented to 00.
                 $price = $field['price'];
                 $decimal_point = '00';
                 
-                /**
-                 * Explode the price to two part. For instance, 12.45 => '12', '45', then convert to an array.
-                 */
+                // Explode the price to two part. For instance, 12.45 => '12', '45', then convert to an array.
                 $digits = explode('.', $price);
                 
                 if (count($digits) > 1):
-                    /**
-                     * Replace decimal_point to $digits[1] (decimal point)
-                     */
+                    // Replace decimal_point to $digits[1] (decimal point)
                     $decimal_point = $digits[1]; 
                 endif;
 
@@ -62,21 +52,15 @@ $genre = get_field('genre');
                 $rate = $field['rate'];
 
                 for ($i = 1; $i <= 5; $i++): 
-                    /**
-                     * If the rate is an integer, display a full star shape
-                     */
+                    // If the rate is an integer, display a full star shape
                     if ($i <= $rate):
                 ?>
                     <i class="bi bi-star-fill"></i>
                     
                     <?php
-                    /**
-                     * If the rate is a float, display a half star shape
-                     * 
-                     * Assume that $i is looped to 5 and $rate is 4.5, $i - 0.5 must be greater or equal to 4.5
-                     * 
-                     * It determines whether the last star should be a full or half shape. 
-                     */
+                    // If the rate is a float, display a half star shape  
+                    // Assume that $i is looped to 5 and $rate is 4.5, $i - 0.5 must be greater or equal to 4.5
+                    // It determines whether the last star should be a full or half shape. 
                     elseif ($i - 0.5 <= $rate):     
                     ?>
                     <i class="bi bi-star-half"></i>

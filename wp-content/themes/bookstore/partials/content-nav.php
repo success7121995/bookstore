@@ -22,9 +22,7 @@
     <nav id="topnav-footer">
         <div id="" class="navbar container">
             <?php
-            /**
-             * Get custom logo
-             */
+            // Get custom logo
             echo get_custom_logo('navbar-brand');
             ?>
             <form id="search-box" class="search-form">

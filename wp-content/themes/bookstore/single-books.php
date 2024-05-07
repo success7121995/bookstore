@@ -5,9 +5,7 @@
  * @package Bookstore
  */
 
-/**
- * Query the specified post by the ID
- */
+// Query the specified post by the ID
 $id = get_the_ID();
 
 $query = new WP_Query(array(
@@ -24,9 +22,7 @@ get_header();
             if ($query -> have_posts()):
                 $query -> the_post();
                 
-                /**
-                 * Pass through the query to the template
-                 */
+                // Pass through the query to the template
                 get_template_part('template-parts/book', null, array('query' => $query));
             endif;
         endif;
@@ -35,9 +31,7 @@ get_header();
     <h3 class="wp-block-heading">Recommendations</h3>
     <div style="margin-bottom: 20px;">
     <?php
-    /**
-     * Embed recommendations
-     */
+    // Embed recommendations
     echo do_shortcode('[display_recommendations]', true)
     ?>
     </div>

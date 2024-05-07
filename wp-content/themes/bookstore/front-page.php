@@ -7,10 +7,7 @@
 get_header();
 ?>
 <div class="container main-content">
-    <?php
-    /**
-     * iterate posts to the home page
-     */    
+    <?php 
     if (have_posts()):
         while(have_posts()):
             the_post();

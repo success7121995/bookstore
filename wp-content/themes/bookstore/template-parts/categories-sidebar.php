@@ -5,9 +5,7 @@
  * @package Bookstore
  */
 
-/**
-* Check if $query and $genres have been set
-*/
+// Check if $query and $genres have been set
 $query = isset($args['query']) ? $args['query'] : null;
 $genres = isset($args['genres']) ? $args['genres'] : null;
 ?>

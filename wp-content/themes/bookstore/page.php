@@ -11,9 +11,6 @@ get_header();
 <div class="container">
     <?php
     if (!is_home() && !is_front_page()):
-        /**
-         * iterate posts to the post page
-         */
         if (have_posts()):
             while(have_posts()):
                 the_post();

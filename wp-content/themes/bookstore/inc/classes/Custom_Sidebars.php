@@ -9,62 +9,45 @@
  */
 
 class Custom_Sidebars {
-    /**
-     * Prevent from multiple instantiations
-     */
+    // Prevent from multiple instantiations
     use Singleton;
 
-    /**
-     * Add shortcode
-     */
+
+    Add shortcode
     private function __construct() {
         add_shortcode('list_out_all_categories_in_sidebar',  [$this, 'list_out_all_categories_in_sidebar']);
     }
 
-    /**
-     *  List out all categories
-     */
+    
+    // List out all categories
     public function list_out_all_categories_in_sidebar() {
-        /**
-         * Globalize to enable the function of retrieving data from the database
-         */
+        // Globalize to enable the function of retrieving data from the database
         global $wpdb;
 
         $query = new WP_Query(array(
             'post_type' => 'books'
         ));
-
-        /**
-         * Retrieve all genre's taxonomies from the database
-         */
+ 
+        // Retrieve all genre's taxonomies from the database
         $genres = $wpdb -> get_results("SELECT * FROM wp_term_taxonomy JOIN wp_terms ON wp_term_taxonomy.term_id = wp_terms.term_id WHERE taxonomy = 'genre'");
 
-        /**
-         * Buffer starts
-         */
+        // Buffer starts
         ob_start();
 
         $this -> siderbar_structure($query, $genres);
 
-        /**
-         * reset query data
-         */
+        // reset query data 
         wp_reset_postdata();
 
-        /*
-         * Buffer ends
-         */
+        // Buffer ends
         return ob_get_clean(); 
     }
 
-    /**
-     * this function constructs a sidebar structure
-     */
+    // this function constructs a sidebar structure
     private function siderbar_structure($query, $genres) {
         if ($query -> have_posts()):
-            /**
-             * Pass through the $query to the template
-             */
+
+            // Pass through the $query to the template
             get_template_part('template-parts/categories-sidebar', null, array(
                 'query' => $query,
                 'genres' => $genres

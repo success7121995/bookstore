@@ -9,14 +9,12 @@
  */
 
 class Custom_Post_Types {
-    /**
-     * Prevent from multiple instantiations
-     */
+
+    // Prevent from multiple instantiations
     use Singleton;
 
-    /**
-     * Action
-     */
+
+    // Action
     private function __construct() {
         add_action('init', [$this, 'custom_post_type']);
         add_action('admin_init', [$this, 'custom_post_type_support']);
@@ -24,9 +22,8 @@ class Custom_Post_Types {
 
     public function custom_post_type() {
 
-        /**
-         * Register post type of books.
-         */
+
+        // Register post type of books.
         register_post_type('books',
             array(
                 'labels' => array(
