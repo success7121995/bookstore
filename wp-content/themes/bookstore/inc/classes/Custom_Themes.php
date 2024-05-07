@@ -25,8 +25,7 @@ class Custom_Themes {
     public function adding_themes() {
         
         // Array of themes that we want to add to wordpress
-        "string $features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
-         */
+        // "string$features" => "$array args" (Optional extra arguments to pass along the feature), default to null.)
         $features = array(
             'custom-logo' => array(),
             'title-tag' => array(),

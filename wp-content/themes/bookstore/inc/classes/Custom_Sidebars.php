@@ -12,8 +12,7 @@ class Custom_Sidebars {
     // Prevent from multiple instantiations
     use Singleton;
 
-
-    Add shortcode
+    // Add shortcode
     private function __construct() {
         add_shortcode('list_out_all_categories_in_sidebar',  [$this, 'list_out_all_categories_in_sidebar']);
     }

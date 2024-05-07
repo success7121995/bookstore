@@ -12,6 +12,8 @@ get_header();
         <?php dynamic_sidebar('category-sidebar'); ?>
     </aside>
     <h1 class="page-title"><?php echo wp_kses_post($category_name); ?></h1>
+    <!-- Cards Wrapper -->
+    <section>
     <?php
     if (!is_home() && !is_front_page()):
         // iterate posts to the archive page
@@ -20,6 +22,7 @@ get_header();
         endif;
     endif;
     ?>
+    </section>
 </div>
 
 <?php

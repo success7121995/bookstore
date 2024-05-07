@@ -559,6 +559,18 @@ aside {
     }
 }
 
+/* Page Cards Wrapper */
+section .card-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 135px;
+    grid-gap: 10px;
+    overflow-x: hidden;
+    position: relative;
+    width: 85%;
+    margin: auto;
+}
+
 /* Card */
 .card.book {
     width: 135px;
