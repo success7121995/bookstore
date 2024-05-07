@@ -13,7 +13,6 @@ class Custom_Post_Types {
     // Prevent from multiple instantiations
     use Singleton;
 
-
     // Action
     private function __construct() {
         add_action('init', [$this, 'custom_post_type']);
@@ -21,7 +20,6 @@ class Custom_Post_Types {
     }
 
     public function custom_post_type() {
-
 
         // Register post type of books.
         register_post_type('books',

@@ -1,28 +1,25 @@
 <?php
 /**
- * Archive
+ * Home Page
  * 
  * @package Bookstore
  */
+$query = new WP_Query(array(
+    'post_type' => 'books'
+)); 
 
 get_header();
 ?>
-<div id="archive" class="container main-content">
-    <aside>
-        <?php dynamic_sidebar('category-sidebar'); ?>
-    </aside>
-    <h1 class="page-title"><?php echo wp_kses_post($category_name); ?></h1>
-    <!-- Cards Wrapper -->
-    <section>
-    <?php
-    if (!is_home() && !is_front_page()):
-        // iterate posts to the archive page
-        if (have_posts()):
-            echo do_shortcode('[display_new_releases]', true);
-        endif;
+<div class="container main-content">
+    <?php 
+    if ($query -> have_posts()):
+        while($query -> have_posts()):
+            print_r(get_field('genre'));
+
+            $query -> the_post();
+        endwhile;
     endif;
     ?>
-    </section>
 </div>
 
 <?php

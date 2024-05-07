@@ -32,7 +32,6 @@ class Custom_Themes {
             'widgets' => array()
         );
 
-        
         // loop through the args to activate theme supports
                 foreach ($features as $feature => $arg) {         
             add_theme_support($feature, $arg);
