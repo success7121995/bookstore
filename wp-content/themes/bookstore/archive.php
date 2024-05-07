@@ -21,10 +21,7 @@ get_header();
          * iterate posts to the archive page
          */
         if (have_posts()):
-            while(have_posts()):
-                the_post();
-                the_title();
-            endwhile;
+            echo do_shortcode('[display_new_releases]', true);
         endif;
     endif;
     ?>

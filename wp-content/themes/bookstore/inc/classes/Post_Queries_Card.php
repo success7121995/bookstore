@@ -64,7 +64,6 @@ class Post_Queries_Card {
 
         $this -> feature_book_query($feature_type, $query);
 
-
         wp_reset_postdata();
         return ob_get_clean();  
     }
@@ -80,7 +79,7 @@ class Post_Queries_Card {
              */
             get_template_part('template-parts/card', null, array(
                 'query' => $query,
-                'feature_type' => $feature_type,
+                'feature_type' => $feature_type
             ));
 
         else:
