@@ -9,6 +9,8 @@
 $args = isset($args['args']) ? $args['args'] : null;
 $query = new WP_Query($args);
 
+echo $query -> post_parent;
+
 // Assume that no related book is found, it is prefined to false
 $found_related = false;
 
@@ -38,6 +40,7 @@ if ($query -> have_posts()):
         $title = $query -> post -> post_title;
         $permalink = get_permalink($query -> post -> ID);
         $image = $fields['image']['url'];
+        $for_sales = $fields['for_sales'];
 
         // Get the genre by object ID then return an array contained WP_Term_Object. Then get the genre name from the object.
         $genre = get_the_terms(get_the_ID(), 'genre')[0] -> name;
@@ -51,6 +54,9 @@ if ($query -> have_posts()):
 
         // Indicate that a related book is found
         $found_related = true;
+
+        // Only display a book for sales
+        if ($for_sales):
 ?>
             <div class="card book">
                 <a href="<?php echo wp_kses_post($permalink); ?>">
@@ -92,7 +98,7 @@ if ($query -> have_posts()):
     
                             echo '$' . wp_kses_post($digits[0]) . '.<span class="card-decimal">' . wp_kses_post($decimal_point) . '</span>';
 ?>
-</p>
+                            </p>
                             </div>
                         </div>
                     </div>
@@ -100,6 +106,7 @@ if ($query -> have_posts()):
                 <button class="add-to-cart card-box">Add to Cart</button>
             </div>
 <?php
+        endif;
     endwhile;
 
     // Scoll Btn only usable on non-archive page

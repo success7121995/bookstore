@@ -21,10 +21,10 @@
     <!-- Topnav Footer -->
     <nav id="topnav-footer">
         <div id="" class="navbar container">
-            <?php
+<?php
             // Get custom logo
             echo get_custom_logo('navbar-brand');
-            ?>
+?>
             <form id="search-box" class="search-form">
                 <input type="text">
                 <button id="search-btn"><i class="bi bi-search"></i></button>
@@ -36,7 +36,7 @@
                     <i class="bi bi-list"></i>
                 </button>
             </div>
-            <?php
+<?php
             wp_nav_menu(array(
                 'menu' => 'topnav',
                 'menu_id' => 'navbar-nav',
@@ -44,6 +44,6 @@
                 'container' => 'ul',
                 'walker' => new Walker_Topnav
             ));
-            ?>
+?>
         </div>
     </nav>

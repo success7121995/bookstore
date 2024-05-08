@@ -29,11 +29,6 @@ class Post_Queries_Card {
                 array(
                     'taxonomy' => 'features',
                     'field' => 'slug',
-                    'terms' => array('for-sales')
-                ),
-                array(
-                    'taxonomy' => 'features',
-                    'field' => 'slug',
                     'terms' => array('new-releases')
                 )
             ),

@@ -518,7 +518,7 @@ aside {
     }
 
     .single-book .single-isbn {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     @media (min-width: 576px) {
@@ -539,7 +539,7 @@ aside {
         }
 
         .single-book .single-isbn {
-            font-size: 13px;
+            font-size: 12px;
         }
     }
 
@@ -588,7 +588,7 @@ aside {
         }
 
         .single-book .single-decimal {
-            font-size: 15px;
+            font-size: 15px
         }
     
         .single-book .single-rate {
