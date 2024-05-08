@@ -17,6 +17,7 @@ class Post_Queries_Card {
         add_shortcode('display_new_releases', [$this, 'display_new_releases']);
         add_shortcode('display_recommendations', [$this, 'display_recommendations']);
         add_shortcode('display_genres', [$this, 'display_genres']);
+        add_shortcode('display_features', [$this, 'display_features']);
     }
 
     // Display new releases
@@ -89,6 +90,36 @@ class Post_Queries_Card {
             'orderby' => 'title',
             'order' => 'ASC',
             'posts_per_page' => 3
+        );
+
+        $this -> book_query($args);
+
+        // Reset query data
+        wp_reset_postdata();
+
+        return ob_get_clean(); 
+    }
+
+    // Display all features
+    public function display_features() {
+        // Get the taxonomy to determine what genre of books we are looking for.
+        $query_object = get_queried_object();
+        $slug = $query_object -> slug;
+
+        ob_start();
+
+        $args = array(
+            'post_type' => 'books',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'features',
+                    'field' => 'slug',
+                    'terms' => array($slug)
+                )
+            ),
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'posts_per_page' => 10
         );
 
         $this -> book_query($args);

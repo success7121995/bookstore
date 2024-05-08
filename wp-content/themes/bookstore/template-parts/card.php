@@ -9,8 +9,6 @@
 $args = isset($args['args']) ? $args['args'] : null;
 $query = new WP_Query($args);
 
-echo $query -> post_parent;
-
 // Assume that no related book is found, it is prefined to false
 $found_related = false;
 
@@ -107,7 +105,7 @@ if ($query -> have_posts()):
             </div>
 <?php
         endif;
-    endwhile;
+    endwhile; 
 
     // Scoll Btn only usable on non-archive page
     if (!is_archive()): 
@@ -117,7 +115,6 @@ if ($query -> have_posts()):
     </div>
 </div>
 <?php
-
 else:
     echo wp_kses_post('<h2 class="not-found-display">Oop! No ' .  ' yet!</h2>');
 endif;
