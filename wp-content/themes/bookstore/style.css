@@ -364,6 +364,133 @@ aside {
     margin: 20px auto;
 }
 
+/* Archive */
+#archive.container {
+    position: relative;
+}
+
+/* Card Wrapper */
+.cards {
+    position: relative;
+}
+
+.card-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 160px;
+    grid-gap: 10px;
+    overflow-x: hidden;
+    width: 85%;
+    margin: auto;
+}
+
+.cards .prev-btn, .cards .next-btn {
+    font-size: 12px;
+    color: var(--var-text-light-color);
+    background: var(--var-text-dark-color);
+    padding: 3px 5px;
+    border-radius: 100%;
+    position: absolute;
+    top: 45%;
+    z-index: 20;
+}
+
+.cards .next-btn {
+    right: 0;
+}
+
+@media (min-width: 578px) {
+    .card-wrapper {
+        grid-gap: 15px;
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-wrapper {
+        grid-gap: 20px;
+        width: 92%;
+    }
+}
+
+/* Card */
+.card.book {
+    width: 160px;
+    border: 1px solid var(--var-divider-color);
+}
+
+.card.book .card-heading, .card-body {
+    width: 80%;
+    min-width: 100px;
+    padding: 8px;
+    margin: auto;
+}
+
+.card-body {
+    padding-top: 0;
+}
+
+    /* Card Heading */
+    .card.book .card-heading {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 2px;
+    }
+
+    .card.book .card-thumbnail {
+        width: 120px;
+        height: 150px;
+    }
+
+    /* Card Body */
+    .card.book .card-body {
+        margin-bottom: 8px;
+    }
+
+    .card.book .card-body .card-box {
+        margin: 3px 0;
+    }
+
+    .card.book .card-title, .card.book .card-tags {
+        color: var(--var-primary-color);
+        display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 30px;
+    }
+
+    .card.book .card-tags {
+        color: var(--var-divider-color);
+        font-size: 10px;
+        -webkit-line-clamp: 1;
+        height: 13px;
+    }
+
+    .card.book .card-rate * {
+        color: var(--var-divider-color);
+        font-size: 10px;
+    }
+
+    .card.book .card-price {
+        color: var(--var-text-dark-color);
+        font-size: 14px;
+    }
+
+    .card.book .card-decimal {
+        color: var(--var-text-dark-color);
+        font-size: 11px;
+    }
+
+    .card.book button.add-to-cart {
+        font-size: 15px;
+        width: 85%;
+        padding: 10px;
+        margin: 0 12px;
+        margin-bottom: 10px;
+    }
+
 /* Single Book */
 
     /* Single Book Heading */

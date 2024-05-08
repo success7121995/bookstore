@@ -7,7 +7,6 @@
  * This class constructs a sidebar for listing all category of books
  * 
  */
-
 class Custom_Sidebars {
     // Prevent from multiple instantiations
     use Singleton;
@@ -17,7 +16,6 @@ class Custom_Sidebars {
         add_shortcode('list_out_all_categories_in_sidebar',  [$this, 'list_out_all_categories_in_sidebar']);
     }
 
-    
     // List out all categories
     public function list_out_all_categories_in_sidebar() {
         // Globalize to enable the function of retrieving data from the database

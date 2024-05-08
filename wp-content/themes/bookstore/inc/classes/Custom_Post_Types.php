@@ -9,7 +9,6 @@
  */
 
 class Custom_Post_Types {
-
     // Prevent from multiple instantiations
     use Singleton;
 
@@ -20,7 +19,6 @@ class Custom_Post_Types {
     }
 
     public function custom_post_type() {
-
         // Register post type of books.
         register_post_type('books',
             array(
@@ -39,7 +37,8 @@ class Custom_Post_Types {
         );
     }
 
-    public function custom_post_type_support() {
+    public function custom_post_type_support() { 
+        // Add functions to the metabox
         add_post_type_support('books', array(
             'page-attributes'
         ));

@@ -4,22 +4,13 @@
  * 
  * @package Bookstore
  */
-$query = new WP_Query(array(
-    'post_type' => 'books'
-)); 
 
 get_header();
 ?>
 <div class="container main-content">
-    <?php 
-    if ($query -> have_posts()):
-        while($query -> have_posts()):
-            print_r(get_field('genre'));
-
-            $query -> the_post();
-        endwhile;
-    endif;
-    ?>
+<?php 
+    echo do_shortcode('[display_genres]', true);
+?>
 </div>
 
 <?php
