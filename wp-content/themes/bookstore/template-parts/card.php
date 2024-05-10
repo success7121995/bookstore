@@ -6,32 +6,7 @@
  */
 
 // $args is imported from the Post_Queries_Card Class
-$args = isset($args['args']) ? $args['args'] : null;
-$query = new WP_Query($args);
-
-echo $query -> post_parent;
-
-// Assume that no related book is found, it is prefined to false
-$found_related = false;
-
-if ($query -> have_posts()):
-?>
-<!-- Cards -->
-<div class="cards">
-
-<?php
-    // Scoll Btn only usable on non-archive page
-    if (!is_archive()):
-        echo wp_kses_post('<button class="scroll prev-btn"><i class="bi bi-caret-left-fill"></i></button>');
-    endif;
-?>
-    <!-- Card Wrapper -->
-    <div class="card-wrapper">
-<?php
-
-    while ($query -> have_posts()):
-        // Retrieve all related posts
-        $query -> the_post();
+$query = isset($args['query']) ? $args['query'] : null;
 
 // Get book's ACF fields
 $fields = get_fields();
@@ -106,18 +81,4 @@ if ($for_sales):
     <button class="add-to-cart card-box">Add to Cart</button>
 </div>
 <?php
-        endif;
-    endwhile;
-
-    // Scoll Btn only usable on non-archive page
-    if (!is_archive()): 
-        echo wp_kses_post('<button class="scroll next-btn"><i class="bi bi-caret-right-fill"></i></button>');
-    endif;
-?>
-    </div>
-</div>
-<?php
-
-else:
-    echo wp_kses_post('<h2 class="not-found-display">Oop! No ' .  ' yet!</h2>');
 endif;
