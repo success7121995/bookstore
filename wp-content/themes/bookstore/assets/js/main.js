@@ -1,5 +1,4 @@
 $(document).ready(() => {
-
     const animationDurtion = 200;
     
     // Toggle navbar nav in mobile view
@@ -79,18 +78,14 @@ $(document).ready(() => {
         if ($(this).hasClass('next-btn')) {
             cardWrapper.animate({
                 scrollLeft: cardWrapper.scrollLeft() + scrollAmount
-            }, sliderAnimationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
+            }, sliderAnimationDurtion);
         }
         
         // Previous slide button
         if ($(this).hasClass('prev-btn')) {
             cardWrapper.animate({
                 scrollLeft: cardWrapper.scrollLeft() - scrollAmount
-            }, sliderAnimationDurtion, cardSliderBtnVisibility($(this), cardWrapper));
+            }, sliderAnimationDurtion);
         }
     });
-
-    const cardSliderBtnVisibility = (btn, cardWrapper) => {
-        // console.log(cardWrapper);
-    }
 }); 

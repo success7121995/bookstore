@@ -16,14 +16,13 @@ class Post_Queries_Card {
     private function __construct() {
         add_shortcode('display_new_releases', [$this, 'display_new_releases']);
         add_shortcode('display_recommendations', [$this, 'display_recommendations']);
-        add_shortcode('display_genres', [$this, 'display_genres']);
     }
 
     // Display new releases
     public function display_new_releases() {
         ob_start();
 
-        $args = array(
+        $query = new WP_Query(array(
             'post_type' => 'books',
             'tax_query' => array(
                 array(
@@ -34,9 +33,10 @@ class Post_Queries_Card {
             ),
             'orderby' => 'title',
             'order' => 'ASC',
-        );
+            'posts_per_page' => 20
+        ));
 
-        $this -> book_query($args);
+        $this -> book_query($query);
 
         // Reset query data
         wp_reset_postdata();
@@ -48,7 +48,7 @@ class Post_Queries_Card {
     public function display_recommendations() {
         ob_start();
 
-        $args = array(
+        $query = new WP_Query(array(
             'post_type' => 'books',
             'tax_query' => array(
                 array(
@@ -59,39 +59,11 @@ class Post_Queries_Card {
             ),
             'orderby' => 'title',
             'order' => 'ASC',
-        );
+        ));
 
-        $this -> book_query($args);
+        // print_r($query);
 
-        // Reset query data
-        wp_reset_postdata();
-
-        return ob_get_clean(); 
-    }
-
-    // Display related books
-    public function display_genres() {
-        // Get the slug to determine what genre of books we are looking for.
-        $query_object = get_queried_object();
-        $slug = $query_object -> slug;
-
-        ob_start();
-
-        $args = array(
-            'post_type' => 'books',
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'genre',
-                    'field' => 'slug',
-                    'terms' => array($slug)
-                )
-            ),
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'posts_per_page' => 3
-        );
-
-        $this -> book_query($args);
+        $this -> book_query($query);
 
         // Reset query data
         wp_reset_postdata();
@@ -100,9 +72,22 @@ class Post_Queries_Card {
     }
 
     // Query books
-    private  function book_query($args) { 
-        get_template_part('template-parts/card', null, array(
-            'args' => $args
-        ));
+    private function book_query($query) { 
+        if ($query -> have_posts()):
+?>
+        <div class="cards">
+            <button class="scroll prev-btn"><i class="bi bi-caret-left-fill"></i></button>
+            <div class="card-wrapper">
+<?php
+            while ($query -> have_posts()):
+                $query -> the_post();
+                get_template_part('template-parts/card', null, array('query' => $query));
+            endwhile;
+?>
+            </div>
+            <button class="scroll next-btn"><i class="bi bi-caret-right-fill"></i></button>
+        </div>
+<?php
+        endif;
     }
 } 

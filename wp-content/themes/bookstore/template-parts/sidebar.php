@@ -9,7 +9,6 @@
 $query = isset($args['query']) ? $args['query'] : null;
 $genres = isset($args['genres']) ? $args['genres'] : null;
 ?>
-
 <ul id="sidenav" class="sidenav">
     <?php
     foreach ($genres as $genre):
