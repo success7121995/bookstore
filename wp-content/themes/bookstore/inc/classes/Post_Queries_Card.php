@@ -75,7 +75,7 @@ class Post_Queries_Card {
     private function book_query($query) { 
         if ($query -> have_posts()):
 ?>
-        <div class="cards">
+        <div class="cards slider">
             <button class="scroll prev-btn"><i class="bi bi-caret-left-fill"></i></button>
             <div class="card-wrapper">
 <?php

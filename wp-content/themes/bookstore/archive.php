@@ -9,6 +9,7 @@
 $query_object = get_queried_object();
 $term = $query_object -> slug;
 $taxonomy = $query_object -> taxonomy;
+$heading = $query_object -> name;
 
 // Get the current page number
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -29,24 +30,41 @@ $query = new WP_Query(array(
 $custom_sidebar = new Custom_Sidebars();
 $sidebar = $custom_sidebar -> render_sidebar();
 
+// need an unlikely integer
+$big = 999999999;
+
 get_header();
 ?>
 <div id="archive" class="container main-content">
     <aside><?php echo wp_kses_post($sidebar); ?></aside>
 <?php
-if ($query -> have_posts()):
-    while ($query -> have_posts()):
-        $query -> the_post();
-        get_template_part('template-parts/card', null, array('query' => $query));
-    endwhile;
-
-    // Pagination
-    echo paginate_links(array(
-        'total' => $query->max_num_pages,
-        'current' => $paged
-    ));
-endif;
+    if ($query -> have_posts()):
 ?>
+    <!-- Cards -->
+    <div class="cards archive">
+        <h1><?php echo wp_kses_post($heading); ?></h1>
+        <div class="card-wrapper">
+<?php
+        while ($query -> have_posts()):
+            $query -> the_post();
+            get_template_part('template-parts/card', null, array('query' => $query));
+        endwhile;
+
+?>
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+<?php
+        // Pagination
+        echo paginate_links(array(
+            'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'total' => $query->max_num_pages,
+            'current' => $paged
+        ));
+    endif;
+?>
+        </div>
+    </div>
 </div>
 
 <?php

@@ -15,7 +15,7 @@ class Custom_Sidebars {
     }
 
     // Retrieve all genre's terms from the database
-    public function get_sidebar_content() {
+    private function get_sidebar_content() {
         // Globalize to enable the function of retrieving data from the database
         global $wpdb;
 
