@@ -407,6 +407,10 @@ aside {
 }
 
 /* Archive */
+#archive {
+    position: relative;
+}
+
 @media (min-width: 768px) {
     #archive {  
         display: grid;
@@ -425,6 +429,24 @@ aside {
     #archive {  
         grid-template-columns: 15% 85%;
     }
+}
+
+/* Pagination */
+.pagination {
+    text-align: center;
+    width: 100%;
+    margin: 15px 0;
+    position: absolute;
+    bottom: 0;
+}
+
+.page-numbers {
+    padding: 4px 8px;
+}
+
+.page-numbers.current {
+    background: var(--var-primary-color);
+    color: var(--var-text-light-color);
 }
 
 /* Card Wrapper */
@@ -462,6 +484,7 @@ aside {
         grid-template-columns: repeat(2, 160px);
         grid-gap: 30px;
         justify-content: center;
+        margin-bottom: 50px;
     }
 
     @media (min-width: 576px) {
@@ -587,7 +610,7 @@ aside {
     .card.book button.add-to-cart {
         font-size: 15px;
         width: 85%;
-        padding: 10px;
+        padding: 8px;
         margin: 0 12px;
         margin-bottom: 10px;
     }

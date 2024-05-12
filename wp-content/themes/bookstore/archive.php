@@ -23,6 +23,8 @@ $query = new WP_Query(array(
             'terms' => $term
         )
     ),
+    'orderby' => 'title',
+    'order' => 'ASC',
     'paged' => $paged
 ));
 
@@ -49,21 +51,21 @@ get_header();
             $query -> the_post();
             get_template_part('template-parts/card', null, array('query' => $query));
         endwhile;
-
-?>
-        </div>
-        <!-- Pagination -->
-        <div class="pagination">
-<?php
-        // Pagination
-        echo paginate_links(array(
-            'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-            'total' => $query->max_num_pages,
-            'current' => $paged
-        ));
     endif;
-?>
+    ?>
         </div>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination">
+<?php
+    // Pagination
+    echo paginate_links(array(
+        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'total' => $query->max_num_pages,
+        'current' => $paged,
+        'prev_next' => false
+    ));
+?>
     </div>
 </div>
 

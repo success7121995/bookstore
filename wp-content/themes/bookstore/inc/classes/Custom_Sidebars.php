@@ -23,7 +23,7 @@ class Custom_Sidebars {
             'post_type' => 'books'
         ));
 
-        $genres = $wpdb -> get_results("SELECT * FROM wp_term_taxonomy JOIN wp_terms ON wp_term_taxonomy.term_id = wp_terms.term_id WHERE taxonomy = 'genre'");
+        $genres = $wpdb -> get_results("SELECT * FROM wp_term_taxonomy JOIN wp_terms ON wp_term_taxonomy.term_id = wp_terms.term_id WHERE taxonomy = 'genre' ORDER BY name ASC");
 
         ob_start();
 
