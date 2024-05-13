@@ -181,6 +181,7 @@ button.add-to-cart {
 .nav-item * {
     font-size: 15px;
 }
+
     /* Topnav Header */
     #topnav-header {
         background: var(--var-primary-color);
@@ -213,6 +214,11 @@ button.add-to-cart {
         align-items: center;
     }
 
+    #topnav-footer .navbar-brand-center {
+        width: 100%;
+        margin: auto;
+    }
+
     @media (min-width: 768px) {
         #topnav-footer {
             flex-direction: column;
@@ -233,6 +239,7 @@ button.add-to-cart {
         display: none;
         background: var(--var-primary-color);
         width: 100%;
+        max-width: 1400px;
         height: auto;
         position: absolute;
         top: 112px;
@@ -277,7 +284,7 @@ button.add-to-cart {
             display: flex !important;
             background: none;
             justify-content: space-between;
-            width: 85%;
+            width: 80%;
             margin: auto;
             position: static;
         }

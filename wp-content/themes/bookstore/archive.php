@@ -52,7 +52,7 @@ get_header();
             get_template_part('template-parts/card', null, array('query' => $query));
         endwhile;
     endif;
-    ?>
+?>
         </div>
     </div>
     <!-- Pagination -->

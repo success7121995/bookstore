@@ -22,8 +22,12 @@
 <nav id="topnav-footer">
     <div id="" class="navbar container">
 <?php
+// Will not show the entire navbar in login and signup page
+if (!is_page('login') && !is_page('signup')):
+?>
+<?php
         // Get custom logo
-        echo get_custom_logo('navbar-brand');
+        echo get_custom_logo();
 ?>
         <form id="search-box" class="search-form">
             <input type="text">
@@ -44,6 +48,14 @@
             'container' => 'ul',
             'walker' => new Walker_Topnav
         ));
+?>
+
+<?php
+else:
+?>
+<div style="text-align: center; width: 100%;"><?php echo get_custom_logo(); ?></div>
+<?php
+endif; 
 ?>
     </div>
 </nav>
