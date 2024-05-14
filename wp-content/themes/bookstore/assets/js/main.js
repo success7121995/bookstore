@@ -94,7 +94,7 @@ $(document).ready(() => {
         e.preventDefault();
 
         // Get the current password display type
-        let password = $(this).closest('.password').find('input');
+        const password = $(this).closest('.password').find('input');
 
         // Check if the password is hidden
         if (password.is('[type="password"]')){
