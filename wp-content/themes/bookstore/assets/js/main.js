@@ -88,4 +88,26 @@ $(document).ready(() => {
             }, sliderAnimationDurtion);
         }
     });
-}); 
+
+    // Hidden Password
+    $('.eye').click(function(e) {
+        e.preventDefault();
+
+        // Get the current password display type
+        let password = $(this).closest('.password').find('input');
+
+        // Check if the password is hidden
+        if (password.is('[type="password"]')){
+            
+            // Change the input type to text to display the password
+            $(this).removeClass('bi-eye-slash').addClass('bi-eye');
+            password.attr('type', 'text');
+            
+        } else if (password.is('[type="text"')) {
+        
+            // Change the input type to text to hide the password
+            $(this).removeClass('bi-eye').addClass('bi-eye-slash');
+            password.attr('type', 'password');
+        }
+    });
+});

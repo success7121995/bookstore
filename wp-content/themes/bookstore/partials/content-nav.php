@@ -4,6 +4,9 @@
  * 
  * @package Bookstore
  */
+
+// Will not show the entire navbar in login and signup page
+if (!is_page('login') && !is_page('signup')):
 ?>
 <!-- Topnav Header -->
 <nav id="topnav-header">
@@ -13,7 +16,7 @@
         </div>
         <div class="nav-item">
             <a class="nav-link" href="#">Service</a>
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="<?php echo get_site_url() . '/login';?>">Login</a>
         </div>
     </div>
 </nav>
@@ -21,10 +24,6 @@
 <!-- Topnav Footer -->
 <nav id="topnav-footer">
     <div id="" class="navbar container">
-<?php
-// Will not show the entire navbar in login and signup page
-if (!is_page('login') && !is_page('signup')):
-?>
 <?php
         // Get custom logo
         echo get_custom_logo();
@@ -49,13 +48,11 @@ if (!is_page('login') && !is_page('signup')):
             'walker' => new Walker_Topnav
         ));
 ?>
-
+    </div>
+</nav>
 <?php
 else:
 ?>
-<div style="text-align: center; width: 100%;"><?php echo get_custom_logo(); ?></div>
+    <div style="text-align: center; width: 100%; margin-top: 75px; margin-bottom: 30px;"><?php echo get_custom_logo(); ?></div>
 <?php
-endif; 
-?>
-    </div>
-</nav>
+endif;
