@@ -200,6 +200,7 @@ button.add-to-cart {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-bottom: 20px;
     }
 
     #topnav-footer .custom-logo {
@@ -249,7 +250,7 @@ button.add-to-cart {
         max-width: 1400px;
         height: auto;
         position: absolute;
-        top: 112px;
+        top: 125px;
         z-index: 100;
     }
 
@@ -272,13 +273,13 @@ button.add-to-cart {
 
     @media (min-width: 400px) {
         #topnav-nav .navbar-nav {
-            top: 120px;
+            top: 135px;
         }
     }
 
     @media (min-width: 500px) {
         #topnav-nav .navbar-nav {
-            top: 125px;
+            top: 145px;
         }
     }
 
@@ -375,6 +376,7 @@ button.add-to-cart {
 
     /* Search */
     #search-box {
+        display: flex;
         border: 1px solid var(--var-divider-color);
     }
 

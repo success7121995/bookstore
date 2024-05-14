@@ -23,7 +23,7 @@ if (!is_page('login') && !is_page('signup')):
 
 <!-- Topnav Footer -->
 <nav id="topnav-footer">
-    <div id="" class="navbar container">
+    <div class="navbar container">
 <?php
         // Get custom logo
         echo get_custom_logo();
