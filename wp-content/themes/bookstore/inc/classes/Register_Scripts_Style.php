@@ -32,12 +32,27 @@ class Register_Scripts_Style {
     }   
 
     public function register_javascript() {
+        // Get the current page slug's that is mainly for login and signup page)
+        $slug = get_post_field( 'post_name', get_post());
+
         // Register script
         wp_register_script('bookstore-jquery', 'https://code.jquery.com/jquery-3.7.1.min.js', array(), '3.7.1', false); // Jquery
-        wp_register_script('bookstore-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);// main js
+        wp_register_script('bookstore-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);// main.js
 
         // Enqueue Scripts
         wp_enqueue_script('bookstore-jquery');
         wp_enqueue_script('bookstore-main');
+
+        // Only register authn.js in login and signup page
+        if ($slug === 'login' || $slug === 'signup'):
+            wp_register_script('bookstore-authn', get_template_directory_uri() . '/assets/js/authn.js', array('bookstore-main'), '1.0.0', true);// authn.js
+
+            // it allows to pass PHP-generated data to JQuery.
+            // 'ajax_url' will be the URL for the WP AJAX endpoint, which allows to make AJAX requests to the WP backend (admin-ajax.php).
+            wp_localize_script( 'bookstore-authn', 'bookstore_authn',
+            array('ajax_url' => admin_url('admin-ajax.php')));
+            
+            wp_enqueue_script('bookstore-authn');
+        endif;
     }
 }

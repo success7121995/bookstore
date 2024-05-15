@@ -9,7 +9,7 @@ get_header();
 ?>
 <div class="authn main-content">
     <h1>Sign Up</h1>
-    <form action="#">
+    <form id="authn" action="<?php echo admin_url('admin-ajax.php'); ?>">
         <div class="form">
             <!-- Prefix -->
             <label for="prefix">Title</label>
