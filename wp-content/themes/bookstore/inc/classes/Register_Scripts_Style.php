@@ -50,8 +50,8 @@ class Register_Scripts_Style {
             // it allows to pass PHP-generated data to JQuery.
             // 'ajax_url' will be the URL for the WP AJAX endpoint, which allows to make AJAX requests to the WP backend (admin-ajax.php).
             wp_localize_script( 'bookstore-authn', 'bookstore_authn',
-            array('ajax_url' => admin_url('admin-ajax.php')));
-            
+            array('ajaxurl' => admin_url('admin-ajax.php')));
+
             wp_enqueue_script('bookstore-authn');
         endif;
     }

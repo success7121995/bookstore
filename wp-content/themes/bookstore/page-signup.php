@@ -9,7 +9,7 @@ get_header();
 ?>
 <div class="authn main-content">
     <h1>Sign Up</h1>
-    <form id="authn" action="<?php echo admin_url('admin-ajax.php'); ?>">
+    <form id="authn">
         <div class="form">
             <!-- Prefix -->
             <label for="prefix">Title</label>
@@ -66,6 +66,7 @@ get_header();
         </div>
     </form>
 </div>
+<div id="response"></div>
 <?php
 get_footer();
 

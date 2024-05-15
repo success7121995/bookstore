@@ -19,9 +19,17 @@ class Custom_Form {
     }
 
     // Submit signup form
-    public static function signup_form_submit() {
-        $prefix = sanitize_text_field($_POST['prefix']);
-        echo $prefix;
-        echo 'hi';
+    public function signup_form_submit() {
+        $prefix = sanitize_text_field($_POST['data']['prefix']);
+        $fname = sanitize_text_field($_POST['data']['fname']);
+        $lname = sanitize_text_field($_POST['data']['lname']);
+        $email = sanitize_text_field($_POST['data']['email']);
+        $password = sanitize_text_field($_POST['data']['password']);
+        $confirm_password = sanitize_text_field($_POST['data']['confirm-password']);
+        echo $prefix . "\n";
+        echo $fname . "\n";
+
+        // Abort execution
+        wp_die();
     }
 }

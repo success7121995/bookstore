@@ -27,3 +27,6 @@ Post_Queries_Card::get_instance();
 
 // Register post types (This class must be called after the Custom_themes)
 Custom_Post_Types::get_instance();
+
+// This handles the AJAX form request then send to the database
+Custom_Form::get_instance();
