@@ -9,30 +9,38 @@ get_header();
 ?>
 <div class="authn main-content">
     <h1>Sign Up</h1>
+    <div id="response"></div>
     <form id="authn">
-        <div class="form">
+        <div id="signup" class="form">
             <!-- Prefix -->
             <label for="prefix">Title</label>
-            <div class="radio">
-                <input type="radio" name="prefix" value="mr" checked>
-                <label for="mr">Mr.</label>
+            <div class="prefix-fields">
+                <div class="radio">
+                    <input type="radio" name="prefix" value="mr" checked>
+                    <label for="mr">Mr.</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="prefix" value="ms">
+                    <label for="ms">Ms.</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="prefix" value="mrs">
+                    <label for="mrs">Mrs.</label>
+                </div>
             </div>
-            <div class="radio">
-                <input type="radio" name="prefix" value="ms">
-                <label for="ms">Ms.</label>
-            </div>
-            <div class="radio">
-                <input type="radio" name="prefix" value="mrs">
-                <label for="mrs">Mrs.</label>
-            </div>
+            <div class="name-fields">
+                <div>
+                    <!-- First Name -->
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname">
+                </div>
 
-            <!-- First Name -->
-            <label for="fname">First Name</label><br>
-            <input type="text" name="fname">
-
-            <!-- Last Name -->
-            <label for="lname">Last Name</label><br>
-            <input type="text" name="lname">
+                <div>
+                    <!-- Last Name -->
+                    <label for="lname">Last Name</label><br>
+                    <input type="text" name="lname">
+                </div>
+            </div>
 
             <!-- Email -->
             <label for="email">Email</label><br>
@@ -66,7 +74,6 @@ get_header();
         </div>
     </form>
 </div>
-<div id="response"></div>
 <?php
 get_footer();
 

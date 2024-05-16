@@ -871,20 +871,28 @@ footer .nav-link {
     margin-bottom: 25px;
 }
 
+.authn #response {
+    background: rgba(245, 144, 137, 50%);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 9px 6px 21px -7px rgba(0,0,0,0.75);
+}
+
+.authn #response .error-message {
+    padding: 10px 0;
+}
+
+.authn label {
+    color: var(--var-primary-color);
+}
+
 .authn input {
     color: var(--var-text-dark-color);
     font-size: 15px; 
     width: 95%;
     padding-top: 10px;
-    border-bottom: 1px solid var(--var-text-dark-color);
-}
-
-.authn .form .radio:first-of-type {
-    margin-top: 10px;
-}
-
-.authn .form .radio:last-of-type {
-    margin-bottom: 15px;
+    border-bottom: 1px solid var(--var-divider-color);
 }
 
 .authn .form .radio,
@@ -918,8 +926,9 @@ footer .nav-link {
     
     .authn .form .password .eye {
         position: absolute;
-        cursor: pointer;
         right: 0;
+        top: 25px;
+        cursor: pointer;
     }
 
     .authn .form .password .bi-eye-slash { /* Hide password */
@@ -958,4 +967,24 @@ footer .nav-link {
         background: var(--var-primary-color);
         color: var(--var-text-light-color);
         padding: 8px 20px;
+    }
+
+    /* Signup Form */
+    .prefix-fields {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        margin: 12px 0 30px 0;
+    }
+    
+    @media (min-width: 576px) {
+        #signup .name-fields {
+            display: grid;
+            grid-template-columns: 49% 48.5%;
+        }
+
+        #signup .name-fields input[name="fname"] {
+            width: 75%;
+        }
     }

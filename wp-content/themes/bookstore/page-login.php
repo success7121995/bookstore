@@ -10,7 +10,7 @@ get_header();
 <div class="authn main-content">
     <h1>Login</h1>
     <form action="#">
-        <div class="form">
+        <div id="login" class="form">
             <!-- Email -->
             <label for="email">Email</label><br>
             <input type="text" name="email"><br>
