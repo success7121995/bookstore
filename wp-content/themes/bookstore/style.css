@@ -421,7 +421,7 @@ aside {
 
 /* Content */
 .main-content {
-    min-height: 85vh;
+    min-height: 100vh;
 }
 
 /* Archive */
@@ -871,14 +871,6 @@ footer .nav-link {
     margin-bottom: 25px;
 }
 
-.authn #response {
-    background: rgba(245, 144, 137, 50%);
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 9px 6px 21px -7px rgba(0,0,0,0.75);
-}
-
 .authn #response .error-message {
     padding: 10px 0;
 }
@@ -915,11 +907,6 @@ footer .nav-link {
 }
 
     /* Authentication Form */
-    .authn .form input[type="text"],
-    .authn .form input[type="password"] {
-        margin-bottom: 45px;
-    }
-
     .authn .form .password {
         position: relative;
     }
@@ -937,6 +924,15 @@ footer .nav-link {
     
     .authn .form .password .bi-eye { /* Display password */
         color: #0066c0;
+    }
+
+    /* Authentication Error Message */
+    .authn .error {
+        margin-bottom: 20px;
+    }
+
+    .authn .error-message {
+        color: #C40000;
     }
 
     /* Authentication Content */
