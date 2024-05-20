@@ -65,28 +65,6 @@ class Custom_Form {
         wp_die();
     }
 
-    // Submit login form
-    public function login_form_submit() {
-        // Connect to database
-        global $wpdb;
-
-        // Get form data from AJAX
-        $data = array(
-            'email' => sanitize_text_field($_POST['data']['email']),
-            'password' => sanitize_text_field($_POST['data']['password']),
-            'terms' => sanitize_text_field($_POST['data']['terms'])
-        );
-
-        $email = $data['email'];
-
-        $email_exist = $wpdb -> get_results("SELECT * FROM customers WHERE email = '$email'");
-
-        wp_send_json_success($email_exist, 200, 0);
-
-        // Abort execution
-        // wp_die();
-    }
-
     // Form Validation
     private function form_data_validation($data = null) {
         if (isset($data)):
@@ -147,47 +125,6 @@ class Custom_Form {
         endif;
     }
 
-    // // Login Validation
-    // private function login_form_validation($data) {
-    //     if (isset($data)):
-    //         // Redefine all data's name
-    //         $email = $data['email'];
-    //         $password = $data['password'];
-    //         $terms = $data['terms'];
-
-    //         // Pack required fields for checking if there is any empty field
-    //         $required_fields = array(
-    //             'email' => 'email',
-    //             'password' => 'password'
-    //         );
-
-    //         // Call out WP_Error to handle error and send back JSON error message to the front end
-    //         $error = new WP_Error;
-            
-    //         // Handling empty fields error
-    //         foreach ($required_fields as $field => $label):
-    //             if (empty($data[$field])):
-    //                 $error->add("empty_$field", '<p class="error-message ' . $field . '">Please enter your ' . $label . '.</p>');
-    //             endif;
-    //         endforeach;
-
-    //         // Authenication
-    //         $this -> login_authnication($email, $password);
-
-    //         // Check if the new user agrees with the terms
-    //         if (empty($terms)):
-    //             $error -> add('agree_terms', '<p class="error-message terms">Please view the terms and the privacy policy then check the checkbox to continue.</p>');
-    //         endif;
-    //     endif;
-    // }
-
-    // private function login_authnication($email, $password) {
-    //     global $wpdb;
-
-    //     $email_exist = $wpdb -> get_results("SELECT * FROM customer WHERE = '$email'");
-    //     return $email_exist;
-    // }
-
     // Email Uniqueness
     private function email_exist($email) {
         global $wpdb;
@@ -204,5 +141,90 @@ class Custom_Form {
         $str_len = strlen($password);
 
         return $str_len > 6 && $str_len < 20 && $preg_match;
+    }
+
+    // Submit login form
+    public function login_form_submit() {
+        // Connect to database
+        global $wpdb;
+
+        // Get form data from AJAX
+        $data = array(
+            'email' => sanitize_text_field($_POST['data']['email']),
+            'password' => sanitize_text_field($_POST['data']['password']),
+            'terms' => sanitize_text_field($_POST['data']['terms'])
+        );
+
+        $email = $data['email'];
+        $password = $data['password'];
+
+        $login_validate = $this -> login_form_validation($data);
+
+        // Send to database if all data pass the validation
+        if ($login_validate -> has_errors()):
+            // Send a JSON response to frontend to display error messages
+            wp_send_json_error($login_validate -> get_error_messages(), 400, 0);
+        else:
+            // Send a JSON response to frontend to access
+            wp_send_json_success(null, 200, 0);
+        endif;
+
+        // Abort execution
+        wp_die();
+    }
+
+    // Login Validation
+    private function login_form_validation($data) {
+        if (isset($data)):
+            // Redefine all data's name
+            $email = $data['email'];
+            $password = $data['password'];
+            $terms = $data['terms'];
+
+            // Pack required fields for checking if there is any empty field
+            $required_fields = array(
+                'email' => 'email',
+                'password' => 'password'
+            );
+
+            // Call out WP_Error to handle error and send back JSON error message to the front end
+            $error = new WP_Error;
+            
+            // Handling empty fields error
+            foreach ($required_fields as $field => $label):
+                if (empty($data[$field])):
+                    $error->add("empty_$field", '<p class="error-message ' . $field . '">Please enter your ' . $label . '.</p>');
+                endif;
+            endforeach;
+
+            // Authenication
+            if (!$this -> login_authnication($email, $password)):
+                $error -> add('login_authn', '<p class="error-message password">Email or password is incorrect.</p>');
+            endif;
+
+            // Check if the new user agrees with the terms
+            if (empty($terms)):
+                $error -> add('agree_terms', '<p class="error-message terms">Please view the terms and the privacy policy then check the checkbox to continue.</p>');
+            endif;
+
+            return $error;
+        endif;
+    }
+
+    // Login authication
+    private function login_authnication($email, $password) {
+        global $wpdb;
+
+        // Query email from database
+        $email_exist = $wpdb -> get_results("SELECT * FROM customer WHERE = '$email'");
+
+        // If email is exist, check 
+        if ($email_exist):
+           $password_hash = $email_exist[0] -> password;
+
+           return password_verify($data['password'], $password_hash);
+        endif;
+
+        return $email_exist;
     }
 }

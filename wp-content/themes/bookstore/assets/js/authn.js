@@ -5,7 +5,6 @@ $(document).ready(() => {
     // Submit form
     $('#authn').submit((function(e) {
         e.preventDefault();
-        
         const form = $(this);
 
         // Prepare the data to be sent based on the current page
@@ -100,6 +99,6 @@ $(document).ready(() => {
                     });
                 }
             }
-        })
+        });
     }));
 }); 
