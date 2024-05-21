@@ -188,8 +188,8 @@ button.add-to-cart {
         padding-left: 15px;
     }
 
-    #topnav-header #logout {
-        
+    #topnav-header .greeting-message {
+        font-size: 14px;
     }
 
     /* Topnav Footer */

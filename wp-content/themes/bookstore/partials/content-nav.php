@@ -19,6 +19,22 @@ if ($session):
     // User data
     $user_prefix = $user[0] -> prefix;
     $user_lname = $user[0] -> lname;
+
+    // Greeting messages setup
+    date_default_timezone_set("Asia/Taipei");
+    $date = intval(date('G')); // Hour
+    $greeting;
+
+    // Case of greetings
+    if ($date >= 6 && $date < 12): // 6:00am - 11:59am -> Good morning
+        $greeting = 'Morning';
+    elseif ($date >= 12 && $date < 18): // 12:00nn - 17:59pm -> Good Afternoon
+        $greeting = 'Afternoon';
+    elseif ($date >= 18 && $date < 21): // 18:00pm - 20:59pm -> Good Evening
+        $greeting = 'Evening';
+    else: // 21:00pm - 5:59am -> Good Night
+        $greeting = 'Night';
+    endif;
 endif;
 
 // Will not show the entire navbar in login and signup page
@@ -33,7 +49,7 @@ if (!is_page('login') && !is_page('signup')):
         <div class="nav-item">
 <?php
         if ($session):
-            echo '<span>Good Day! ' . $user_prefix . '. ' . $user_lname . '</span>';
+            echo '<span class="greeting-message">Good ' . $greeting . ', ' . $user_prefix . '. ' . $user_lname . '</span>';
         endif;
 ?>
             <a class="nav-link" href="#">Service</a>
