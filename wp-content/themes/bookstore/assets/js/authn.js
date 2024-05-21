@@ -47,8 +47,9 @@ $(document).ready(() => {
                     // Redirect to the previous page (if preivous page is login page, redirect to home page)
                     window.location.href = '/bookstore';
                 } else if (path === 'login') {
-                    console.log(res);
-                    console.log('hihs');
+                   // Temporary redirect to home page
+                    // Redirect to the previous page (if preivous page is login page, redirect to home page)
+                    window.location.href = '/bookstore';
                 }
             },
             error: err => {

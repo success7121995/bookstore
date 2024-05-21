@@ -57,6 +57,11 @@ class Custom_Form {
                 'password' => $password_hash,
                 'is_agree_terms' => $data['terms']
             ));
+
+            // Set cookie by new user ID
+            $user_id = $wpdb -> insert_id;
+            $this -> set_cookie($user_id);
+
             // Send a JSON response to frontend to access
             wp_send_json_success(null, 200, 0);
         endif;
@@ -200,20 +205,32 @@ class Custom_Form {
         $is_authnicated = false;
 
         // Query email from database
-        $email_exist = $wpdb -> get_results("SELECT * FROM customers WHERE email = '$email'");
+        $user = $wpdb -> get_results("SELECT * FROM customers WHERE email = '$email'");
 
         // If email does not exist, fail the authntication
-        if ($email_exist):
-            // Get the hashed password from the object.
-           $password_hash = $email_exist[0] -> password;
+        if ($user):
+            // Get the hashed password and user ID from the object.
+            $password_hash = $user[0] -> password;
+            
+            // Verify the password and the hashed password
+            if (password_verify($password, $password_hash)):
+                // Set cookie by user ID
+                $this -> set_cookie($user[0] -> id);
 
-           // Verify the password and the hashed password
-           if (password_verify($password, $password_hash)):
                 // If email and password are verified, pass the authntication
                 return $is_authnicated = true;
            endif;
         endif;
 
         return $is_authnicated;
+    }
+
+    // Set cookie
+    private function set_cookie($user_id) {
+        $cookie_name = 'AuthnUser';
+        $cookie_value = $cookie_name . '_' . $user_id;
+        $cookie_expiration = time() + 3600; // Expire in an hour
+
+        setcookie($cookie_name, $cookie_value, $cookie_expiration, '/');
     }
 }
