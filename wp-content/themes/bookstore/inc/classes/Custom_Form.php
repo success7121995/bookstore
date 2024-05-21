@@ -230,7 +230,9 @@ class Custom_Form {
         $cookie_name = 'AuthnUser';
         $cookie_value = $cookie_name . '_' . $user_id;
         $cookie_expiration = time() + 3600; // Expire in an hour
+        $cookie_secure = true;
+        $cookie_httponly = true;
 
-        setcookie($cookie_name, $cookie_value, $cookie_expiration, '/');
+        setcookie($cookie_name, $cookie_value, $cookie_expiration, '/', "", $cookie_secure, $cookie_httponly);
     }
 }

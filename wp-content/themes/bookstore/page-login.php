@@ -37,6 +37,7 @@ get_header();
                 <p><a class="text-link" href="#">Forgot Password</a></p>
                 <div class="error terms"></div>
             </div>
+            <input type="hidden" name="csrftoken" value="tokenvalue"/>
             <div class="submit">
                 <button type="submit">Login</button>
             </div>

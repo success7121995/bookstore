@@ -4,6 +4,11 @@
  * 
  * @package Bookstore
  */
+// Check if cookie is set
+$isset_cookie = isset($_COOKIE["AuthnUser"]) ? $_COOKIE["AuthnUser"] : null;
+
+// Globalize to enable the function of retrieving data from the database
+global $wpdb;
 
 // Will not show the entire navbar in login and signup page
 if (!is_page('login') && !is_page('signup')):
@@ -16,7 +21,14 @@ if (!is_page('login') && !is_page('signup')):
         </div>
         <div class="nav-item">
             <a class="nav-link" href="#">Service</a>
-            <a class="nav-link" href="<?php echo get_site_url() . '/login';?>">Login</a>
+            
+<?php
+            if(!$isset_cookie):
+?>
+                <a class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/login';?>">Login</a>
+<?php           
+            endif;
+?>
         </div>
     </div>
 </nav>
@@ -26,7 +38,7 @@ if (!is_page('login') && !is_page('signup')):
     <div class="navbar container">
 <?php
         // Get custom logo
-        echo get_custom_logo();
+        echo wp_kses_post(get_custom_logo());
 ?>
         <form id="search-box" class="search-form">
             <input type="text">
