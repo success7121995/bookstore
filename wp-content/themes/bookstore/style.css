@@ -126,7 +126,6 @@ li {
         font-family: var(--var-open-sans-font);
     }
 
-    
     article {
         color: var(--var-text-dark-color);
         font-size: 12px;
@@ -187,6 +186,10 @@ button.add-to-cart {
 
     #topnav-header .nav-link {
         padding-left: 15px;
+    }
+
+    #topnav-header #logout {
+        
     }
 
     /* Topnav Footer */

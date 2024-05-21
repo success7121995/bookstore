@@ -6,6 +6,7 @@
  * 
  * 
  */
+session_start();
 
 class Custom_Form {
     // Prevent from multiple instantiations
@@ -18,9 +19,13 @@ class Custom_Form {
         add_action('wp_ajax_signup_form_submit', [$this, 'signup_form_submit']);
         add_action('wp_ajax_nopriv_signup_form_submit', [$this, 'signup_form_submit']);
 
-        //Login
+        // Login
         add_action('wp_ajax_login_form_submit', [$this, 'login_form_submit']);
         add_action('wp_ajax_nopriv_login_form_submit', [$this, 'login_form_submit']);
+
+        // Logout
+        add_action('wp_ajax_logout', [$this, 'logout']);
+        add_action('wp_ajax_nopriv_logout', [$this, 'logout']);
     }
 
     // Submit signup form
@@ -50,17 +55,17 @@ class Custom_Form {
 
             // Pass validation, send to datebase
             $wpdb -> insert('customers', array(
-                'prefix' => $data['prefix'],
-                'fname' => $data['fname'],
-                'lname' => $data['lname'],
-                'email' => $data['email'],
+                'prefix' => ucfirst($data['prefix']),
+                'fname' => ucfirst($data['fname']),
+                'lname' => ucfirst($data['lname']),
+                'email' => strtolower($data['email']),
                 'password' => $password_hash,
                 'is_agree_terms' => $data['terms']
             ));
 
             // Set cookie by new user ID
             $user_id = $wpdb -> insert_id;
-            $this -> set_cookie($user_id);
+            $this -> set_session($user_id);
 
             // Send a JSON response to frontend to access
             wp_send_json_success(null, 200, 0);
@@ -176,7 +181,7 @@ class Custom_Form {
     private function login_form_validation($data) {
         if (isset($data)):
             // Redefine all data's name
-            $email = $data['email'];
+            $email = strtolower($data['email']);
             $password = $data['password'];
             $terms = $data['terms'];
 
@@ -211,11 +216,13 @@ class Custom_Form {
         if ($user):
             // Get the hashed password and user ID from the object.
             $password_hash = $user[0] -> password;
+            $user_id = $user[0] -> id;
             
             // Verify the password and the hashed password
             if (password_verify($password, $password_hash)):
-                // Set cookie by user ID
-                $this -> set_cookie($user[0] -> id);
+
+                // Set the session for the authenticated user
+                $this -> set_session($user_id);
 
                 // If email and password are verified, pass the authntication
                 return $is_authnicated = true;
@@ -225,14 +232,13 @@ class Custom_Form {
         return $is_authnicated;
     }
 
-    // Set cookie
-    private function set_cookie($user_id) {
-        $cookie_name = 'AuthnUser';
-        $cookie_value = $cookie_name . '_' . $user_id;
-        $cookie_expiration = time() + 3600; // Expire in an hour
-        $cookie_secure = true;
-        $cookie_httponly = true;
+    // Set session
+    private function set_session($user_id) {
+        $_SESSION['AuthnUser'] = $user_id;
+    }
 
-        setcookie($cookie_name, $cookie_value, $cookie_expiration, '/', "", $cookie_secure, $cookie_httponly);
+    // Logout
+    public function logout() {
+        session_destroy();
     }
 }

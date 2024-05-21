@@ -41,7 +41,7 @@ $(document).ready(() => {
                 action,
                 data
             },
-            success: res => {
+            success: () => {
                 if (path === 'signup') {
                     // Temporary redirect to home page
                     // Redirect to the previous page (if preivous page is login page, redirect to home page)

@@ -4,11 +4,22 @@
  * 
  * @package Bookstore
  */
-// Check if cookie is set
-$isset_cookie = isset($_COOKIE["AuthnUser"]) ? $_COOKIE["AuthnUser"] : null;
 
-// Globalize to enable the function of retrieving data from the database
-global $wpdb;
+// Check if session is set (if set, it means user logged in)
+$session = isset($_SESSION['AuthnUser']) ? $_SESSION['AuthnUser'] : null;
+
+// Connect to database then retrieve the user data if the user is authenticated
+if ($session):
+    global $wpdb;
+
+    // Find user by ID that stored in session (Set at Custom_Form.php) 
+    $user_id = $session;
+    $user = $wpdb -> get_results("SELECT * FROM customers WHERE id = $user_id");
+
+    // User data
+    $user_prefix = $user[0] -> prefix;
+    $user_lname = $user[0] -> lname;
+endif;
 
 // Will not show the entire navbar in login and signup page
 if (!is_page('login') && !is_page('signup')):
@@ -20,14 +31,23 @@ if (!is_page('login') && !is_page('signup')):
             <p>Tel: 123-456-789</p>
         </div>
         <div class="nav-item">
+<?php
+        if ($session):
+            echo '<span>Good Day! ' . $user_prefix . '. ' . $user_lname . '</span>';
+        endif;
+?>
             <a class="nav-link" href="#">Service</a>
             
 <?php
-            if(!$isset_cookie):
+        if (!$session):
 ?>
-                <a class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/login';?>">Login</a>
-<?php           
-            endif;
+            <a class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/login';?>">Login</a>
+<?php   
+        else:
+?>
+            <a id="logout" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/logout';?>">Logout</a>
+<?php
+        endif;
 ?>
         </div>
     </div>

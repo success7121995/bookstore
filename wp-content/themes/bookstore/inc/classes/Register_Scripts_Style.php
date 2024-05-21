@@ -38,6 +38,10 @@ class Register_Scripts_Style {
         // Register script
         wp_register_script('bookstore-jquery', 'https://code.jquery.com/jquery-3.7.1.min.js', array(), '3.7.1', false); // Jquery
         wp_register_script('bookstore-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true);// main.js
+    
+        // it allows to pass PHP-generated data to JQuery.
+        // 'ajaxurl' will be the URL for the WP AJAX endpoint, which allows to make AJAX requests to the WP backend (admin-ajax.php).
+        wp_localize_script('bookstore-main', 'bookstore_logout', array('ajaxurl' => admin_url('admin-ajax.php'))); // This is specifically for logout function
 
         // Enqueue Scripts
         wp_enqueue_script('bookstore-jquery');
@@ -46,9 +50,8 @@ class Register_Scripts_Style {
         // Only register authn.js in login and signup page
         if ($slug === 'login' || $slug === 'signup'):
             wp_register_script('bookstore-authn', get_template_directory_uri() . '/assets/js/authn.js', array('bookstore-main'), '1.0.0', true);// authn.js
-
-            // it allows to pass PHP-generated data to JQuery.
-            // 'ajax_url' will be the URL for the WP AJAX endpoint, which allows to make AJAX requests to the WP backend (admin-ajax.php).
+            
+            // This is for authentication form submission
             wp_localize_script( 'bookstore-authn', 'bookstore_authn',
             array('ajaxurl' => admin_url('admin-ajax.php')));
 

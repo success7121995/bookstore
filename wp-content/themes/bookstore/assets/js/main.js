@@ -110,4 +110,26 @@ $(document).ready(() => {
             password.attr('type', 'password');
         }
     });
+
+    // Logout
+    $('#logout').click(e => {
+        e.preventDefault();
+
+        // Fire off the request to the /admin-ajax.php
+        $.ajax({
+            type: 'get',
+            url: bookstore_logout.ajaxurl, // This is the URL for the WordPress AJAX endpoint from Register_Script_Style class
+            data: {
+                action: 'logout',
+                data: ''
+            },
+            success: () => {
+                // Redirect to home page
+                window.location.href = '/bookstore';
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
+    });
 });
