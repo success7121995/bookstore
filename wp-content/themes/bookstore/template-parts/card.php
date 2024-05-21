@@ -78,7 +78,7 @@ if ($for_sales):
             </div>
         </div>
     </a>
-    <button class="add-to-cart card-box">Add to Cart</button>
+    <button class="add-to-cart card-box"> Add to Cart</button>
 </div>
 <?php
 endif;

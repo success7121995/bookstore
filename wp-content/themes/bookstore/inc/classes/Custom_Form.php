@@ -6,6 +6,7 @@
  * 
  * 
  */
+// Get ready to create session
 session_start();
 
 class Custom_Form {

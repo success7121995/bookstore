@@ -4,7 +4,7 @@
  * 
  * @package Bookstore
  */
-
+if (!isset($_SESSION['AuthnUser'])):
 get_header();
 ?>
 <div class="authn main-content">
@@ -85,5 +85,12 @@ get_header();
 </div>
 <?php
 get_footer();
+else:   
+    // Redirect to 404 page
+    include('404.php');
+
+    // Do nothing when redirect to 404 page
+    exit;
+endif;
 
 

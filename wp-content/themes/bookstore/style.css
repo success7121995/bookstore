@@ -45,12 +45,7 @@ body {
 @media (min-width: 1200px) {
     .container {
         width: 80%;
-    }
-}
-
-@media (min-width: 1600px) {
-    .container {
-        max-width: 1400px;
+        max-width: 1200px;
     }
 }
 
@@ -162,6 +157,10 @@ button.add-to-cart {
 /* Icon */
 .icon.bi {
     font-size: 20px;
+}
+
+.icon-btn {
+    cursor: pointer;
 }
 
 /* Navbar */
@@ -987,3 +986,14 @@ footer .nav-link {
             width: 75%;
         }
     }
+
+/* 404 */
+#page-404 {
+    margin-top: 20%;
+    text-align: center;
+    min-height: 70vh;
+}
+
+#page-404 h1 {
+    font-size: 90px;
+}

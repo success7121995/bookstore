@@ -12,6 +12,8 @@ $query = isset($args['query']) ? $args['query'] : null;
 $id = $query -> post -> ID;
 $field = get_fields($id);
 
+echo $id;
+
 // Redefine all fields
 $title = $query -> post -> post_title;
 $content = $query -> post -> post_content;
@@ -39,8 +41,8 @@ $genre = get_the_terms(get_the_ID(), 'genre')[0] -> name;
         <div class="single-heading-content-container">
             <div>
                 <div class="btn-group">
-                    <a href="#"><i class="bi bi-heart"></i></a>
-                    <a href="#"><i class="bi bi-share"></i></a>
+                <i id="add-to-wishlist" class="bi bi-heart icon-btn" data-tab="<?php echo $id; ?>"></i>
+                <i id="share-link" class="bi bi-share icon-btn"></i>
                 </div>
                 <p class="single-price">
 <?php           
@@ -77,7 +79,7 @@ $genre = get_the_terms(get_the_ID(), 'genre')[0] -> name;
                 </div>
             </div>
             <div>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" data-value="<?php echo $id; ?>">Add to Cart</button>
             </div>
         </div>
     </div>
