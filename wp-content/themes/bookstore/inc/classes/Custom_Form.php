@@ -145,18 +145,12 @@ class Custom_Form {
 
     // Submit login form
     public function login_form_submit() {
-        // Connect to database
-        global $wpdb;
-
         // Get form data from AJAX
         $data = array(
             'email' => sanitize_text_field($_POST['data']['email']),
             'password' => sanitize_text_field($_POST['data']['password']),
             'terms' => sanitize_text_field($_POST['data']['terms'])
         );
-
-        $email = $data['email'];
-        $password = $data['password'];
 
         $login_validate = $this -> login_form_validation($data);
 
@@ -166,7 +160,7 @@ class Custom_Form {
             wp_send_json_error($login_validate -> get_error_messages(), 400, 0);
         else:
             // Send a JSON response to frontend to access
-            wp_send_json_success(null, 200, 0);
+            wp_send_json_success(null, 200, 0); 
         endif;
 
         // Abort execution
@@ -181,24 +175,11 @@ class Custom_Form {
             $password = $data['password'];
             $terms = $data['terms'];
 
-            // Pack required fields for checking if there is any empty field
-            $required_fields = array(
-                'email' => 'email',
-                'password' => 'password'
-            );
-
             // Call out WP_Error to handle error and send back JSON error message to the front end
             $error = new WP_Error;
-            
-            // Handling empty fields error
-            foreach ($required_fields as $field => $label):
-                if (empty($data[$field])):
-                    $error->add("empty_$field", '<p class="error-message ' . $field . '">Please enter your ' . $label . '.</p>');
-                endif;
-            endforeach;
 
             // Authenication
-            if (!$this -> login_authnication($email, $password)):
+            if (!$this -> login_authnication($email, $password) || empty($email) || empty($password)):
                 $error -> add('login_authn', '<p class="error-message password">Email or password is incorrect.</p>');
             endif;
 
@@ -215,16 +196,24 @@ class Custom_Form {
     private function login_authnication($email, $password) {
         global $wpdb;
 
-        // Query email from database
-        $email_exist = $wpdb -> get_results("SELECT * FROM customer WHERE = '$email'");
+        // Assume the user is not authenticated
+        $is_authnicated = false;
 
-        // If email is exist, check 
+        // Query email from database
+        $email_exist = $wpdb -> get_results("SELECT * FROM customers WHERE email = '$email'");
+
+        // If email does not exist, fail the authntication
         if ($email_exist):
+            // Get the hashed password from the object.
            $password_hash = $email_exist[0] -> password;
 
-           return password_verify($data['password'], $password_hash);
+           // Verify the password and the hashed password
+           if (password_verify($password, $password_hash)):
+                // If email and password are verified, pass the authntication
+                return $is_authnicated = true;
+           endif;
         endif;
 
-        return $email_exist;
+        return $is_authnicated;
     }
 }
