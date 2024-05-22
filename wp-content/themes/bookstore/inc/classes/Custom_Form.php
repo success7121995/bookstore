@@ -57,8 +57,8 @@ class Custom_Form {
             // Pass validation, send to datebase
             $wpdb -> insert('customers', array(
                 'prefix' => ucfirst($data['prefix']),
-                'fname' => ucfirst($data['fname']),
-                'lname' => ucfirst($data['lname']),
+                'fname' => ucwords($data['fname']),
+                'lname' => ucwords($data['lname']),
                 'email' => strtolower($data['email']),
                 'password' => $password_hash,
                 'is_agree_terms' => $data['terms']

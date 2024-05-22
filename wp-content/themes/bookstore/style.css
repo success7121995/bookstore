@@ -45,7 +45,7 @@ body {
 @media (min-width: 1200px) {
     .container {
         width: 80%;
-        max-width: 1200px;
+        max-width: 1300px;
     }
 }
 
@@ -252,7 +252,7 @@ button.add-to-cart {
         display: none;
         background: var(--var-primary-color);
         width: 100%;
-        max-width: 1400px;
+        max-width: 1300px;
         height: auto;
         position: absolute;
         top: 125px;
@@ -797,6 +797,7 @@ footer .nav-item {
 
 footer h4 {
     font-size: 12px;
+    font-weight: 700;
 }
 
 footer .nav-item,

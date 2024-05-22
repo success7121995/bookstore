@@ -12,8 +12,6 @@ $query = isset($args['query']) ? $args['query'] : null;
 $id = $query -> post -> ID;
 $field = get_fields($id);
 
-echo $id;
-
 // Redefine all fields
 $title = $query -> post -> post_title;
 $content = $query -> post -> post_content;
