@@ -175,8 +175,7 @@ button.add-to-cart {
     }
 
     #topnav-header .navbar {
-        display: flex;
-        justify-content: space-between;
+        text-align: end;
     }
 
     #topnav-header .nav-item * {

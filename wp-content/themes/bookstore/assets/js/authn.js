@@ -1,6 +1,7 @@
 $(document).ready(() => {
     // Get the path to recognize the current page
-    const path = window.location.pathname.split('/')[2];
+    const path = window.location.pathname.split('/')[3];
+    console.log(path);
 
     // Submit form
     $('#authn').submit((function(e) {

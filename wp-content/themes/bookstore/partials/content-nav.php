@@ -8,6 +8,10 @@
 // Check if session is set (if set, it means user logged in)
 $session = isset($_SESSION['AuthnUser']) ? $_SESSION['AuthnUser'] : null;
 
+$query_object = get_queried_object();
+$slug = !empty($query_object) ? $query_object -> slug : null;
+$heading = !empty($query_object) ? $query_object -> name : null;
+
 // Connect to database then retrieve the user data if the user is authenticated
 if ($session):
     global $wpdb;
@@ -38,29 +42,25 @@ if ($session):
 endif;
 
 // Will not show the entire navbar in login and signup page
-if (!is_page('login') && !is_page('signup')):
+if ($slug !== 'login' && $slug !== 'signup'):
 ?>
 <!-- Topnav Header -->
 <nav id="topnav-header">
     <div class="navbar container">
         <div class="nav-item">
-            <p>Tel: 123-456-789</p>
-        </div>
-        <div class="nav-item">
 <?php
         if ($session):
             echo '<span class="greeting-message">Good ' . $greeting . ', ' . $user_prefix . '. ' . $user_lname . '</span>';
         endif;
-?>
-            <a class="nav-link" href="#">Service</a>
-            
-<?php
+
         if (!$session):
 ?>
             <a class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/login';?>">Login</a>
 <?php   
         else:
 ?>
+            
+            <a id="wishlist" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/favorites';?>">Wish List</a>
             <a id="logout" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/logout';?>">Logout</a>
 <?php
         endif;

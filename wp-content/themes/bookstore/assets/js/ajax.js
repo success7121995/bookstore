@@ -39,10 +39,9 @@ $(document).ready(() => {
             success: res => {
                 console.log(res);
             },
-            error: () => {
-                
+            error: err => {
+                console.log(err.responseJSON.data);
             }
-        });
-        
+        });      
     });
 });

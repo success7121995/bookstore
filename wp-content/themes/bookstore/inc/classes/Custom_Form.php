@@ -139,7 +139,11 @@ class Custom_Form {
     // Email Uniqueness
     private function email_exist($email) {
         global $wpdb;
-        return $wpdb -> query("SELECT * FROM customers WHERE email = '$email'");
+
+        // Query
+        $db_query = $wpdb -> prepare("SELECT * FROM customers WHERE email = '$email'");
+
+        return $wpdb -> query($db_query);
     }
 
     // Password Validation
@@ -210,8 +214,11 @@ class Custom_Form {
         // Assume the user is not authenticated
         $is_authnicated = false;
 
+        // Query
+        $db_query = $wpdb -> prepare("SELECT * FROM customers WHERE email = '$email'");
+
         // Query email from database
-        $user = $wpdb -> get_results("SELECT * FROM customers WHERE email = '$email'");
+        $user = $wpdb -> get_results($db_query);
 
         // If email does not exist, fail the authntication
         if ($user):

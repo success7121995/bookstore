@@ -33,7 +33,9 @@ class Register_Scripts_Style {
 
     public function register_javascript() {
         // Get the current page slug's that is mainly for login and signup page)
-        $slug = get_post_field( 'post_name', get_post());
+        $query_object = get_queried_object();
+
+        $slug = !empty($query_object) ? $query_object -> slug : null;
 
         // Register script
         wp_register_script('bookstore-jquery', 'https://code.jquery.com/jquery-3.7.1.min.js', array(), '3.7.1', false); // Jquery
