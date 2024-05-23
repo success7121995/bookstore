@@ -18,10 +18,11 @@ foreach ($list_decode['id'] as $id):
     $db_query = $wpdb -> prepare("SELECT post_title FROM wp_posts WHERE ID = $id");
     $query = $wpdb -> get_results($db_query);
 
-    print_r($query);
+    // print_r($query);
     // Redefine all fields
-    // $title = $query[0] -> ;
+    $title = $query[0] -> post_title;
     $image = $field['image']['url'];
 
+    echo $title . "<br>";
 
 endforeach;
