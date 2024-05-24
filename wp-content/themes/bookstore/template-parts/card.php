@@ -12,8 +12,9 @@ $query = isset($args['query']) ? $args['query'] : null;
 $fields = get_fields();
 
 // Redefine all fields
+$id = $query -> post -> ID;
 $title = $query -> post -> post_title;
-$permalink = get_permalink($query -> post -> ID);
+$permalink = get_permalink($id);
 $image = $fields['image']['url'];
 $for_sales = $fields['for_sales'];
 
@@ -69,6 +70,11 @@ if ($for_sales):
                 if (count($digits) > 1):
                     // Replace decimal_point to $digits[1] (decimal point)
                     $decimal_point = $digits[1]; 
+
+                    // If the decimal point is a single digit, add 0 afterward. For instance 12.90
+                    if ((int)$decimal_point < 10):
+                        $decimal_point = $digits[1] . '0';
+                    endif;
                 endif;
 
                 echo '$' . wp_kses_post($digits[0]) . '.<span class="card-decimal">' . wp_kses_post($decimal_point) . '</span>';
@@ -78,7 +84,7 @@ if ($for_sales):
             </div>
         </div>
     </a>
-    <button class="add-to-cart card-box"> Add to Cart</button>
+    <button class="add-to-cart card-box" data-value="<?php echo wp_kses_post($id); ?>"> Add to Cart</button>
 </div>
 <?php
 endif;

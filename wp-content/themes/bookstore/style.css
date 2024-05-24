@@ -987,6 +987,19 @@ footer .nav-link {
         }
     }
 
+/* Cart */
+
+        /* QTY */
+        #cart .item-qty {
+            display: flex;
+        }
+
+        #cart .item-qty .qty-btn  {
+            color: var(--var-secondary-color);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
 /* 404 */
 #page-404 {
     margin-top: 20%;

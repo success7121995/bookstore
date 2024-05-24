@@ -31,5 +31,5 @@ Custom_Post_Types::get_instance();
 // This handles the AJAX form request then send to the database
 Custom_Form::get_instance();
 
-// Wish list
-Wishlist::get_instance();
+// Cart
+Cart::get_instance();

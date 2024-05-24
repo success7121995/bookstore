@@ -60,7 +60,7 @@ if ($slug !== 'login' && $slug !== 'signup'):
         else:
 ?>
             
-            <a id="wishlist" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/favorites';?>">Wish List</a>
+            <a id="wishlist" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/cart';?>">Cart</a>
             <a id="logout" class="nav-link" href="<?php echo wp_kses_post(get_site_url()) . '/logout';?>">Logout</a>
 <?php
         endif;

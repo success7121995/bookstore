@@ -12,26 +12,21 @@ $user_id = $_SESSION['AuthnUser'];
 // Connect to database
 global $wpdb;
 
-// Get the WP_Term_Object to learn the slug, determine what template should be loaded
+// Get the post title from WP_Term_Object
 $query_object = get_queried_object();
-$slug = $query_object -> slug;
-$heading = $query_object -> name;
+$heading = $query_object -> post_title;
 
-// The slug detemines what kind of data should being looked for
-$db_query;
-if ($slug === 'favorites'):
-    $db_query = $wpdb -> prepare("SELECT wishlist FROM customers WHERE id = $user_id");
-
-    $list = $wpdb -> get_var($db_query);
-endif;
+// Retrieve the cart data from database
+$db_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
+$cart = $wpdb -> get_var($db_query);
 
 get_header();
 ?>
 <div class="container">
     <h1><?php echo wp_kses_post($heading); ?></h1>
 <?php
-    get_template_part('template-parts/list', null, array(
-        'list' => $list
+    get_template_part('template-parts/cart', null, array(
+        'cart' => $cart
     ));
 ?>
 </div>

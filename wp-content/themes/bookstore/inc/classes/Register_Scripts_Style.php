@@ -37,19 +37,19 @@ class Register_Scripts_Style {
 
         $slug = !empty($query_object) ? $query_object -> slug : null;
 
+        
+
         // Register script
         wp_register_script('bookstore-jquery', 'https://code.jquery.com/jquery-3.7.1.min.js', array(), '3.7.1', false); // Jquery
         wp_register_script('bookstore-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true); // main.js
-        wp_register_script('bookstore-ajax', get_template_directory_uri() . '/assets/js/ajax.js', array(), '1.0.0', true); // ajax.js
     
         // it allows to pass PHP-generated data to JQuery.
         // 'ajaxurl' will be the URL for the WP AJAX endpoint, which allows to make AJAX requests to the WP backend (admin-ajax.php).
-        wp_localize_script('bookstore-ajax', 'bookstore_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+        wp_localize_script('bookstore-main', 'bookstore_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
         // Enqueue Scripts
         wp_enqueue_script('bookstore-jquery');
         wp_enqueue_script('bookstore-main');
-        wp_enqueue_script('bookstore-ajax');
 
         // Only register authn.js in login and signup page
         if ($slug === 'login' || $slug === 'signup'):
@@ -60,6 +60,19 @@ class Register_Scripts_Style {
             array('ajaxurl' => admin_url('admin-ajax.php')));
 
             wp_enqueue_script('bookstore-authn');
+        endif;
+
+        $slug = !empty($query_object) ? $query_object -> post_name : null;
+
+        // Only show in cart page
+        if ($slug === 'cart'):
+            wp_register_script('bookstore-cart', get_template_directory_uri() . '/assets/js/cart.js', array('bookstore-main'), '1.0.0', true);// authn.js
+            
+            // This is for authentication form submission
+            wp_localize_script( 'bookstore-cart', 'bookstore_cart',
+            array('ajaxurl' => admin_url('admin-ajax.php')));
+
+            wp_enqueue_script('bookstore-cart');
         endif;
     }
 }

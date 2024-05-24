@@ -1,6 +1,28 @@
 $(document).ready(() => {
     const animationDurtion = 200;
-    
+
+    // Logout
+    $('#logout').click(e => {
+        e.preventDefault();
+
+        // Fire off the request to the /admin-ajax.php
+        $.ajax({
+            type: 'get',
+            url: bookstore_ajax.ajaxurl, // This is the URL for the WordPress AJAX endpoint from Register_Script_Style class
+            data: {
+                action: 'logout',
+                data: ''
+            },
+            success: () => {
+                // Redirect to home page
+                window.location.href = '/bookstore';
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
+    });
+
     // Toggle navbar nav in mobile view
     $('.navbar-toggler').click(function(e) {
         e.preventDefault();
@@ -109,5 +131,29 @@ $(document).ready(() => {
             $(this).removeClass('bi-eye').addClass('bi-eye-slash');
             password.attr('type', 'password');
         }
+    });
+
+    // Add to cart
+    $('.add-to-cart').click(function(e) {
+        e.preventDefault();
+
+        id = $(this).attr('data-value');
+
+        // Fire off the request to the /admin-ajax.php
+        $.ajax({
+            type: 'post',
+            url: bookstore_ajax.ajaxurl, // This is the URL for the WordPress AJAX endpoint from Register_Script_Style class
+            datatype: 'json',
+            data: {
+                action: 'add_to_cart',
+                data: id
+            },
+            success: res => {
+                console.log(res);
+            },
+            error: err => {
+                console.log(err.responseJSON.data);
+            }
+        });      
     });
 });

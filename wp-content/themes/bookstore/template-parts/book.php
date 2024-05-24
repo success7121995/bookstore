@@ -39,8 +39,7 @@ $genre = get_the_terms(get_the_ID(), 'genre')[0] -> name;
         <div class="single-heading-content-container">
             <div>
                 <div class="btn-group">
-                <i id="add-to-wishlist" class="bi bi-heart icon-btn" data-tab="<?php echo $id; ?>"></i>
-                <i id="share-link" class="bi bi-share icon-btn"></i>
+                    <i id="share-link" class="bi bi-share icon-btn"></i>
                 </div>
                 <p class="single-price">
 <?php           
@@ -50,6 +49,11 @@ $genre = get_the_terms(get_the_ID(), 'genre')[0] -> name;
                 if (count($digits) > 1):
                     // Replace decimal_point to $digits[1] (decimal point)
                     $decimal_point = $digits[1]; 
+                    
+                    // If the decimal point is a single digit, add 0 afterward. For instance 12.90
+                    if ((int)$decimal_point < 10):
+                        $decimal_point = $digits[1] . '0';
+                    endif;
                 endif;
 
                 echo '$' . wp_kses_post($digits[0]) . '.<span class="single-decimal">' . wp_kses_post($decimal_point) . '</span>';
