@@ -43,7 +43,7 @@ class Cart {
 
                 // Add the book to the cart
                 if (!is_array($cart_decode)): // cart would be NULL if no data is stored, in contrast the cart will perform as an array.
-                    $cart_decode = array('book' =>array(
+                    $cart_decode = array('book' => array(
                         'id' => $book_id,
                         'qty' => 1
                     ));
@@ -64,8 +64,13 @@ class Cart {
                     endfor;
 
                     // Append the book to the cart array
-                    $cart_decode['book']['id'] = $book_id;
-                    $cart_decode['book']['qty'] = 1;
+                    // $cart_decode['book']['id'] = $book_id;
+                    // $cart_decode['book']['qty'] = 1;
+
+                    array_push($cart_decode['book'], array(
+                        'id' => $book_id,
+                        'qty' => 1
+                    ));
                 endif;
 
                 // Convert the cart array to JSON 
