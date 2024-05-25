@@ -24,7 +24,6 @@ Requires PHP: 7.4
     /* Font Families */
     --var-tinos-font: "Tinos", serif;
     --var-open-sans-font: "Open Sans", sans-serif;
-
 }
 
 * {
@@ -989,15 +988,44 @@ footer .nav-link {
 
 /* Cart */
 
-        /* QTY */
-        #cart .item-qty {
+    /* Cart Item */
+    .item {
+        display: grid;
+        grid-template-columns: 35% 65%;
+    }
+
+        /* Cart Item Heading */
+        .item-heading {
             display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        #cart .item-qty .qty-btn  {
+        .item-heading .cart-image {
+            width: 100px;
+            height: 140px;
+        }
+
+        /* Cart Item Body */
+        .item-body .item-title {
             color: var(--var-secondary-color);
-            font-size: 20px;
-            cursor: pointer;
+            display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            height: 45px;
+        }
+
+        /* Quantity */
+        .item-body .item-qty {
+            text-align: center;
+            width: 50px;
+        }
+
+        .item-body .qty-btn {
+            color: var(--var-text-dark-color);
+            font-size: 15px;
         }
 
 /* 404 */

@@ -61,7 +61,7 @@ class Cart {
                         endif;
 
                         // Amount of cart exceeds
-                        if (count($cart_decode) > 4):
+                        if (count($cart_decode) >= 4):
                             wp_send_json_error('max_cart_reached', 403, 0);
                         endif;
                     endfor;
@@ -86,6 +86,7 @@ class Cart {
         endif;
     }
 
+    // Get cart data
     public function get_cart_data() {
         // Connect to database
         global $wpdb;
@@ -106,12 +107,42 @@ class Cart {
             // Convert the JSON object to an array
             $cart_decode = json_decode($cart);
 
-            
+            $cart_data = $this -> get_books_data($cart_decode);
 
-            wp_send_json_success($cart_decode, 200, 0);
+            wp_send_json_success($cart_data, 200, 0);
+        endif;
+    }
+
+    // Get books data by the cart data
+    private function get_books_data($cart_data) {
+        // Connect to database
+        global $wpdb;
+
+        // predefine an array for storing retrieved cart data
+        $cart_array = array();
+
+        if (!empty($cart_data)):
+            foreach ($cart_data as $cart => $value):
+                $book_id = $value -> id;
+                $qty = $value -> qty;
+      
+                // Get book's ACF field, book's title and book's permalink by ID
+                $wp_query = $wpdb -> prepare("SELECT post_title, guid FROM wp_posts WHERE id = $book_id");
+                $query = $wpdb -> get_results($wp_query);
+                $field = get_fields($book_id);
+
+                // Append all books data to the cart array
+                $cart_array[] = array(
+                    'id' => $book_id,
+                    'qty' => $qty,
+                    'title' => $query[0] -> post_title,
+                    'permalink' => $query[0] -> guid,
+                    'image' => $field['image']['url'],
+                    'price' => $field['price'],
+                );
+            endforeach;
         endif;
 
-        
-
+        return $cart_array;
     }
 } 

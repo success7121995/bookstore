@@ -39,8 +39,6 @@ class Custom_Post_Types {
 
     public function custom_post_type_support() { 
         // Add functions to the metabox
-        add_post_type_support('books', array(
-            'page-attributes'
-        ));
+        add_post_type_support('books', array('page-attributes'));
     }
 } 
