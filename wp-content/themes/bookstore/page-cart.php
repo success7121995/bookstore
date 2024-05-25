@@ -16,19 +16,11 @@ global $wpdb;
 $query_object = get_queried_object();
 $heading = $query_object -> post_title;
 
-// Retrieve the cart data from database
-$db_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
-$cart = $wpdb -> get_var($db_query);
-
 get_header();
 ?>
 <div class="container">
     <h1><?php echo wp_kses_post($heading); ?></h1>
-<?php
-    get_template_part('template-parts/cart', null, array(
-        'cart' => $cart
-    ));
-?>
+
 </div>
 
 <?php

@@ -1,4 +1,23 @@
 $(document).ready(() => {
+    
+
+    retrieveCartData();
+
+    // Async retrieve cart data
+    function retrieveCartData() {
+        $.ajax({
+            type: 'get',
+            url: bookstore_cart.ajaxurl, // This is the URL for the WordPress AJAX endpoint from Register_Script_Style class
+            datatype: 'json',
+            data: {
+                action: 'get_cart_data'
+            },
+            success: res => {
+                console.log(res);
+            }
+        })
+    }
+
     // Change QTY
     $('.qty-btn').click(function(e) {
         e.preventDefault();
