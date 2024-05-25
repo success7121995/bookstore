@@ -84,6 +84,9 @@ class Cart {
                 wp_send_json_error($e, 500, 0);
             }
         endif;
+
+        // Abort execution
+        wp_die();
     }
 
     // Get cart data
@@ -111,6 +114,9 @@ class Cart {
 
             wp_send_json_success($cart_data, 200, 0);
         endif;
+
+        // Abort execution
+        wp_die();
     }
 
     // Get books data by the cart data
