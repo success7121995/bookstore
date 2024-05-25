@@ -2,6 +2,13 @@ $(document).ready(() => {
     const form = $('#cart');
     retrieveCartData();
 
+    // Submit cart form
+    form.on('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+
     // Retrieve cart data
     function retrieveCartData() {
         $.ajax({
@@ -19,11 +26,4 @@ $(document).ready(() => {
             }
         })
     }
-
-    // Submit cart form
-    form.on('keydown', e => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
 });
