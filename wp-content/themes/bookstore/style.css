@@ -987,11 +987,79 @@ footer .nav-link {
     }
 
 /* Cart */
+.total {
+    text-align: end;
+    margin: 15px 0 20px 0;
+}
+
+.total * {
+    font-size: 16px;
+    color: var(--var-text-dark-color);
+}
+
+.cart-submit {
+    font-size: 18px;
+    color: var(--var-text-light-color); 
+    background: var(--var-primary-color);
+    margin: 15px 0;
+}
 
     /* Cart Item */
     .item {
         display: grid;
         grid-template-columns: 35% 65%;
+        grid-gap: 10px;
+        padding: 25px 0;
+        border-bottom: 1px solid var(--var-divider-color);
+        position: relative;
+    }
+
+    .item:first-child {
+        border-top: 1px solid var(--var-divider-color);
+    }
+
+    .item * {
+        color: var(--var-secondary-color);
+    }
+
+    .item .item-total {
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+    }
+
+    .item .item-unit-price, .item .item-total {
+        font-size: 13px;
+        color: var(--var-text-dark-color);
+    }
+
+    .item .item-price {
+        font-size: 16px;
+        color: var(--var-text-dark-color);
+    }
+
+    @media (min-width: 470px) {
+        .item {
+            grid-template-columns: 28% 72%;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .item {
+            grid-template-columns: 25% 75%;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .item {
+            grid-template-columns: 23% 50% 27%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .item {
+            grid-template-columns: 17% 60% 23%;
+        }
     }
 
         /* Cart Item Heading */
@@ -1001,20 +1069,52 @@ footer .nav-link {
             gap: 5px;
         }
 
+        .item-heading .trash {
+            color: var(--var-text-dark-color);
+            font-size: 20px;
+        }
+
         .item-heading .cart-image {
             width: 100px;
             height: 140px;
         }
 
+        @media (min-width: 576px) {
+            .item-heading {
+                gap: 20px;
+            }
+        }
+
         /* Cart Item Body */
+        .item-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .item-body .item-title {
-            color: var(--var-secondary-color);
             display: -webkit-box; /* Limit the title to two lines and add ellipsis (...) if the title is overflow */
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
             text-overflow: ellipsis;
             overflow: hidden;
             height: 45px;
+        }
+
+        .item-body .item-stock {
+            color: #007600;
+            font-size: 12px;
+        }
+
+        .item-body .item-stock.out-of-stock {
+            color: #C40000;
+        }
+
+        @media (min-width: 768px) {
+            .item-body .item-title {
+                -webkit-line-clamp: 3;
+                height: 67px;
+            }
         }
 
         /* Quantity */

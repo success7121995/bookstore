@@ -20,23 +20,17 @@ get_header();
 ?>
 <div class="container">
     <h1><?php echo wp_kses_post($heading); ?></h1>
+    <div class="total">
+        <p>Item(s): 0</p>
+        <p>Subtotal: $0</p>
+    </div>
     <form id="cart">
-        <div class="item">
-            <div class="item-heading">
-                <input type="checkbox" name="cart-check" checked>
-                <img class="cart-image" src="http://localhost/bookstore/wp-content/uploads/2024/05/Barash-Cullen-and-Stoeltings-Clinical-Anesthesia-Print-eBook-with-Multimedia-Ninth-Edition.jpg" alt="">
-            </div>
-            <div class="item-body">
-                <h4 class="item-title">CUET PG Psychology 2024 - Masters MSc MA Psychology Entrance Exam Preparation Book with MCQ Questions Bank - (2 Books Set) by Power Within Psychology - Edition 3</h4>
-                <div class="btn-group">
-                    <i class="qty-btn minus bi bi-dash-square-fill"></i>
-                    <input class="item-qty" type="text" name="qty" value="1">
-                    <i class="qty-btn plug bi bi-plus-square-fill"></i>
-                </div>
-                <p class="item-price">$100</p>
-            </div>
+        <div class="items"></div>
+        <div class="total">
+            <p>Item(s): 0</p>
+            <p>Total: $0</p>
+            <input class="cart-submit" type="button" value="Buy Now"/>
         </div>
-        <input type="button" value="Buy Now"/>
     </form>
 </div>
 
