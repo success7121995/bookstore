@@ -40,7 +40,7 @@ $(document).ready(() => {
                         const permalink = resData[i]['permalink'];
                         const image = resData[i]['image'];
                         const price = resData[i]['price'];
-                        const inStock = resData[1]['in_stock'];
+                        const inStock = resData[i]['in_stock'];
 
                         // Subtotal
                         const subtotal = price * qty;

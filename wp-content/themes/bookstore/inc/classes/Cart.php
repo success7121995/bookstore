@@ -152,8 +152,10 @@ class Cart {
                 $cart_decode = json_decode($cart, true);
 
                 // Search corresponding ID from cart array, once it is found, remove it from the cart 
-                $new_array = array_search($book_id, array_column($cart_decode, 'id'));
-                unset($new_array);
+                $key = array_search($book_id, array_column($cart_decode, 'id'));
+                if ($key !== false):
+                    array_splice($cart_decode, $key, 1);
+                endif;
 
                 // Stringigy to JSON
                 $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
