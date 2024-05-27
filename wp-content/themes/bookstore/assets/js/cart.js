@@ -1,5 +1,8 @@
 $(document).ready(() => {
     const form = $('#cart');
+    let items = 0;
+    let total = 0;
+
     retrieveCartData();
 
     // Submit cart form
@@ -21,7 +24,6 @@ $(document).ready(() => {
             success: res => {
                 // Get the data from the response
                 const resData = res.data;
-                console.log(resData);
 
                 // Preset the cart template
                 let cartTemplate = ''; 
@@ -41,9 +43,11 @@ $(document).ready(() => {
                         const image = resData[i]['image'];
                         const price = resData[i]['price'];
                         const inStock = resData[i]['in_stock'];
+                        const subtotal = resData[i]['subtotal'];
 
-                        // Subtotal
-                        const subtotal = price * qty;
+                        // Total
+                        items = resData[i]['items'];
+                        total += resData[i]['subtotal'];
 
                         cartTemplate += `
                         <div class="item" data-value="${id}">
@@ -69,14 +73,28 @@ $(document).ready(() => {
 
                 $('.items').html(cartTemplate);
 
+                // Acumulator
+                accumulator(items, total);
+
                 // Remove cart item
                 $('.trash').click(function(e) {
                     e.preventDefault();
                     
-                    console.log('hi');
+                    // Get the item ID
                     const id = $(this).closest('.item').attr('data-value');
                     removeCartItem(id);
                 });
+
+                // Change the QTY
+                $('.qty-btn').click(function(e) {
+                    e.preventDefault();
+
+                    // Get the item ID and current qty
+                    const id = $(this).closest('.item').attr('data-value');
+                    let qty = form.find('[name="qty"]').val();
+
+                    changeQty(id, qty)
+                }) 
             },
             error: err => {
                 console.log(err);
@@ -94,14 +112,50 @@ $(document).ready(() => {
                 action: 'remove_cart_item',
                 data: id
             },
-            success: res => {
+            success: () => {
+                // Reset the total to 0 and accumulate again
+                total = 0
+
+                // Everytime remove an item from the cart, retrieve all books again
                 retrieveCartData();
-                // console.log(res);
             },
             error: err => {
                 console.log(err);
             }
         });
-    }
+    };
 
+    // Count the numbers of item and accumulate the total
+    function accumulator(items, total) {
+        $('.total').html(`
+            <p>Item(s): ${items}</p>
+            <p>Subtotal: $${total}</p>
+        `);
+    };
+
+    // Change qty
+    function changeQty(id, qty) {
+
+        if ($(this).hasClass('minus')) {
+            qty--;
+        } else if ($(this).hasClass('plug')) {
+            qty++;
+        }
+        
+        $.ajax({
+            type: 'post',
+            url: bookstore_cart.ajaxurl, // This is the URL for the WordPress AJAX endpoint from Register_Script_Style class
+            datatype: 'json',
+            data: {
+                action: 'change_item_qty',
+                data: {id, qty}
+            },
+            success: res => {
+                console.log(res);
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
+    };
 });

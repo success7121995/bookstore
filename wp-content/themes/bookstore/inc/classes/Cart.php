@@ -25,6 +25,10 @@ class Cart {
         // Remove cart item
         add_action('wp_ajax_remove_cart_item', [$this, 'remove_cart_item']);
         add_action('wp_ajax_nopriv_remove_cart_item', [$this, 'remove_cart_item']);
+
+        // Change item quantity
+        add_action('wp_ajax_change_item_qty', [$this, 'change_item_qty']);
+        add_action('wp_ajax_nopriv_change_item_qty', [$this, 'change_item_qty']);
     }
 
     // Add to cart
@@ -109,7 +113,7 @@ class Cart {
             try {
                 $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
 
-                // Parse the JSON string
+                // Retrieve the cart JSON object from database
                 $cart = $wpdb -> get_var($wp_query);
 
                 // Convert the JSON object to an array
@@ -177,11 +181,45 @@ class Cart {
         wp_die();
     }
 
+    // Change quantity
+    public function change_item_qty() {
+        // Connect to database
+        global $wpdb;
+
+        // Check if the user has logged in
+        $user_id = isset($_SESSION['AuthnUser']) ? $_SESSION['AuthnUser'] : null;
+
+        if (!$user_id):
+            
+            wp_send_json_error('unauthn_user', 403, 0);
+        else:
+            try {
+                $data = array(
+                    'book_id' => sanitize_text_field($_POST['data']['id']),
+                    'qty' => sanitize_text_field($_POST['data']['qty'])
+                );
+
+                if (!empty($data)):
+                    $book_id = $data['book_id'];
+                    $qty = $data['qty'];
+
+                    $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
+                    // Retrieve the cart JSON object from database
+                    $cart = $wpdb -> get_var($wp_query);
+                endif;
+                
+                wp_send_json_success($data, 201, 0);
+            } catch (Exception $e) {
+
+                wp_send_json_error($e, 500, 0);
+            }
+        endif;
+    }
+
     // Get books data by the cart data
     private function get_books_data($cart_data) {
         // Connect to database
         global $wpdb;
-
 
         // predefine an array for storing retrieved cart data
         $cart_array = array();
