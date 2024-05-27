@@ -21,6 +21,10 @@ class Cart {
         // Get cart data
         add_action('wp_ajax_get_cart_data', [$this, 'get_cart_data']);
         add_action('wp_ajax_nopriv_get_cart_data', [$this, 'get_cart_data']);
+
+        // Remove cart item
+        add_action('wp_ajax_remove_cart_item', [$this, 'remove_cart_item']);
+        add_action('wp_ajax_nopriv_remove_cart_item', [$this, 'remove_cart_item']);
     }
 
     // Add to cart
@@ -39,7 +43,7 @@ class Cart {
         else: 
             try {
                 // Get user ID from session and retrieve the cart
-                $user_id = $_SESSION['AuthnUser'];  
+                $user_id = $_SESSION['AuthnUser'];
                 $db_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
                 $cart = $wpdb -> get_var($db_query);
 
@@ -74,7 +78,7 @@ class Cart {
                 endif;
 
                 // Stringigy to JSON
-                $cart_encode = json_encode($cart_decode);
+                $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
 
                 // Update the cart
                 $wpdb -> update('customers', array('cart' => $cart_encode), array('id' => $user_id));
@@ -102,17 +106,69 @@ class Cart {
             
             wp_send_json_error('unauthn_user', 403, 0);
         else:
-            $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
+            try {
+                $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
 
-            // Parse the JSON string
-            $cart = $wpdb -> get_var($wp_query);
+                // Parse the JSON string
+                $cart = $wpdb -> get_var($wp_query);
 
-            // Convert the JSON object to an array
-            $cart_decode = json_decode($cart);
+                // Convert the JSON object to an array
+                $cart_decode = json_decode($cart, true);
 
-            $cart_data = $this -> get_books_data($cart_decode);
+                $cart_data = $this -> get_books_data($cart_decode);
 
-            wp_send_json_success($cart_data, 200, 0);
+                // Response cart data to frontend
+                wp_send_json_success($cart_data, 200, 0);
+            } catch (Exception $e) {
+                wp_send_json_error($e, 500, 0);
+            }
+        endif;
+
+        // Abort execution
+        wp_die();
+    }
+
+    // Remove cart items
+    public function remove_cart_item() {
+        // Connect to database
+        global $wpdb;
+
+        $book_id = sanitize_text_field($_POST['data']);
+
+        // Check if the user has logged in
+        $user_id = isset($_SESSION['AuthnUser']) ? $_SESSION['AuthnUser'] : null;
+
+        if (!$user_id):
+            
+            wp_send_json_error('unauthn_user', 403, 0);
+        else:
+            try {    
+                $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
+
+                // Parse the JSON string
+                $cart = $wpdb -> get_var($wp_query);
+
+                // Convert the JSON object to an array
+                $cart_decode = json_decode($cart, true);
+
+                // Search corresponding ID from cart array, once it is found, remove it from the cart 
+                $new_array = array_search($book_id, array_column($cart_decode, 'id'));
+                unset($new_array);
+
+                // Stringigy to JSON
+                $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
+
+                // Update the cart
+                $wpdb -> update('customers', array('cart' => $cart_encode), array('id' => $user_id));
+
+                $cart_data = $this -> get_books_data($cart_decode);
+
+                // Remove the specified book from the cart by its ID
+                wp_send_json_success($cart_data, 200, 0);
+
+            } catch (Exception $e) {
+                wp_send_json_error($e, 500, 0);
+            }
         endif;
 
         // Abort execution
@@ -124,27 +180,43 @@ class Cart {
         // Connect to database
         global $wpdb;
 
+
         // predefine an array for storing retrieved cart data
         $cart_array = array();
 
         if (!empty($cart_data)):
             foreach ($cart_data as $cart => $value):
-                $book_id = $value -> id;
-                $qty = $value -> qty;
+                $book_id = $value['id'];
+                $qty = $value['qty'];
       
                 // Get book's ACF field, book's title and book's permalink by ID
                 $wp_query = $wpdb -> prepare("SELECT post_title, guid FROM wp_posts WHERE id = $book_id");
                 $query = $wpdb -> get_results($wp_query);
                 $field = get_fields($book_id);
 
+                // Define return variables
+                $price = $field['price'];
+                $title = $query[0] -> post_title;
+                $permalink = $query[0] -> guid;
+                $image = $field['image']['url'];
+                $items = count($cart_data);
+
+                // Retrieve the number of stock
+                $stock = (int)$field['inventory']; // Convert string to Integer
+                $in_stock = $stock < 0 ? 'out-of-stock' : 'in-stock';
+
                 // Append all books data to the cart array
                 $cart_array[] = array(
                     'id' => $book_id,
                     'qty' => $qty,
-                    'title' => $query[0] -> post_title,
-                    'permalink' => $query[0] -> guid,
-                    'image' => $field['image']['url'],
-                    'price' => $field['price'],
+                    'price' => $price,
+                    'title' => $title,
+                    'permalink' => $permalink,
+                    'image' => $image,
+                    'items' => $items,
+                    'stock' => $stock,
+                    'in_stock' => $in_stock,
+                    'subtotal' => $price * $qty
                 );
             endforeach;
         endif;

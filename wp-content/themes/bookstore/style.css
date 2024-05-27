@@ -111,7 +111,6 @@ li {
         font-family: var(--var-open-sans-font);
         font-weight: 400;
         text-align: center;
-        text-transform: capitalize;
         color: var(--var-divider-color);
     }
 
@@ -1072,6 +1071,7 @@ footer .nav-link {
         .item-heading .trash {
             color: var(--var-text-dark-color);
             font-size: 20px;
+            cursor: pointer;
         }
 
         .item-heading .cart-image {
@@ -1102,6 +1102,10 @@ footer .nav-link {
         }
 
         .item-body .item-stock {
+            text-transform: capitalize;
+        }
+
+        .item-body .item-stock.in-stock {
             color: #007600;
             font-size: 12px;
         }
@@ -1126,6 +1130,7 @@ footer .nav-link {
         .item-body .qty-btn {
             color: var(--var-text-dark-color);
             font-size: 15px;
+            cursor: pointer;
         }
 
 /* 404 */

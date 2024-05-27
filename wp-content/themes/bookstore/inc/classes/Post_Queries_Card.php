@@ -20,6 +20,8 @@ class Post_Queries_Card {
 
     // Display new releases
     public function display_new_releases() {
+        $terms = 'new-releases';
+
         ob_start();
 
         $query = new WP_Query(array(
@@ -28,7 +30,7 @@ class Post_Queries_Card {
                 array(
                     'taxonomy' => 'features',
                     'field' => 'slug',
-                    'terms' => array('new-releases')
+                    'terms' => array($terms)
                 )
             ),
             'orderby' => 'title',
@@ -36,7 +38,7 @@ class Post_Queries_Card {
             'posts_per_page' => 20
         ));
 
-        $this -> book_query($query);
+        $this -> book_query($query, $terms);
 
         // Reset query data
         wp_reset_postdata();
@@ -46,6 +48,8 @@ class Post_Queries_Card {
 
     // Display new releases
     public function display_recommendations() {
+        $terms = 'recommendations';
+
         ob_start();
 
         $query = new WP_Query(array(
@@ -54,7 +58,7 @@ class Post_Queries_Card {
                 array(
                     'taxonomy' => 'features',
                     'field' => 'slug',
-                    'terms' => array('recommendations')
+                    'terms' => array($terms)
                 )
             ),
             'orderby' => 'title',
@@ -63,7 +67,7 @@ class Post_Queries_Card {
 
         // print_r($query);
 
-        $this -> book_query($query);
+        $this -> book_query($query, $terms);
 
         // Reset query data
         wp_reset_postdata();
@@ -72,7 +76,7 @@ class Post_Queries_Card {
     }
 
     // Query books
-    private function book_query($query) { 
+    private function book_query($query, $terms) { 
         if ($query -> have_posts()):
 ?>
         <div class="cards slider">
@@ -88,6 +92,8 @@ class Post_Queries_Card {
             <button class="scroll next-btn"><i class="bi bi-caret-right-fill"></i></button>
         </div>
 <?php
+        else:
+            echo '<h2 class="not-found-display">No ' . substr($terms, 0, -1) . ' is avaiable yet!</h2>';
         endif;
     }
 } 
