@@ -206,9 +206,20 @@ class Cart {
                     $wp_query = $wpdb -> prepare("SELECT cart FROM customers WHERE id = $user_id");
                     // Retrieve the cart JSON object from database
                     $cart = $wpdb -> get_var($wp_query);
+
+                    // Convert the JSON object to an array
+                    $cart_decode = json_decode($cart, true);
+
+                    // Search corresponding ID from cart array, once it is found, update the quantity of the item
+                    $key = array_search($book_id, array_column($cart_decode, 'id'));
+
+                    // Upate the quantity
+                    $cart_decode[$key]['qty'] = $qty;
+
+                    
+                    wp_send_json_success($cart_decode, 201, 0);
                 endif;
                 
-                wp_send_json_success($data, 201, 0);
             } catch (Exception $e) {
 
                 wp_send_json_error($e, 500, 0);

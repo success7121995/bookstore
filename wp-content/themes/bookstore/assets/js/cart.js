@@ -93,8 +93,8 @@ $(document).ready(() => {
                     const id = $(this).closest('.item').attr('data-value');
                     let qty = form.find('[name="qty"]').val();
 
-                    changeQty(id, qty)
-                }) 
+                    changeQty($(this), id, qty);
+                });
             },
             error: err => {
                 console.log(err);
@@ -134,11 +134,11 @@ $(document).ready(() => {
     };
 
     // Change qty
-    function changeQty(id, qty) {
+    function changeQty(btn, id, qty) {
 
-        if ($(this).hasClass('minus')) {
+        if (btn.hasClass('minus')) {
             qty--;
-        } else if ($(this).hasClass('plug')) {
+        } else if (btn.hasClass('plug')) {
             qty++;
         }
         
