@@ -133,11 +133,15 @@ class Cart {
     }
 
     // Remove cart items
-    public function remove_cart_item() {
+    public function remove_cart_item($book_id) {
         // Connect to database
         global $wpdb;
 
-        $book_id = sanitize_text_field($_POST['data']);
+        // if the parameter is empty, it indicates that the book id is assigned from the trash button.
+        // In constrast, it indicates that that book's quantity reaches to 0
+        if (empty($book_id)):
+            $book_id = sanitize_text_field($_POST['data']);
+        endif;
 
         // Check if the user has logged in
         $user_id = isset($_SESSION['AuthnUser']) ? $_SESSION['AuthnUser'] : null;
@@ -214,10 +218,23 @@ class Cart {
                     $key = array_search($book_id, array_column($cart_decode, 'id'));
 
                     // Upate the quantity
-                    $cart_decode[$key]['qty'] = $qty;
+                    $cart_decode[$key]['qty'] = (int)$qty;
 
-                    
-                    wp_send_json_success($cart_decode, 201, 0);
+                    // If the item quantity reaches to 0, remove it from the cart
+                    if ($cart_decode[$key]['qty'] <= 0):
+
+                        $this -> remove_cart_item($cart_decode[$key]['id']);
+                    else:         
+                        // Stringigy to JSON
+                        $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
+
+                        // Update the cart
+                        $wpdb -> update('customers', array('cart' => $cart_encode), array('id' => $user_id));
+
+                        $cart_data = $this -> get_books_data($cart_decode);
+                        
+                        wp_send_json_success($cart_data, 201, 0);
+                    endif;
                 endif;
                 
             } catch (Exception $e) {
@@ -246,11 +263,12 @@ class Cart {
                 $field = get_fields($book_id);
 
                 // Define return variables
-                $price = $field['price'];
+                $price = (float)$field['price'];
                 $title = $query[0] -> post_title;
                 $permalink = $query[0] -> guid;
                 $image = $field['image']['url'];
-                $items = count($cart_data);
+                $items += $qty;
+                $subtotal = round($price * $qty, 2);
 
                 // Retrieve the number of stock
                 $stock = (int)$field['inventory']; // Convert string to Integer
@@ -267,7 +285,7 @@ class Cart {
                     'items' => $items,
                     'stock' => $stock,
                     'in_stock' => $in_stock,
-                    'subtotal' => $price * $qty
+                    'subtotal' => $subtotal
                 );
             endforeach;
         endif;

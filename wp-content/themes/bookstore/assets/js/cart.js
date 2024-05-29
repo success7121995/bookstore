@@ -1,7 +1,5 @@
 $(document).ready(() => {
     const form = $('#cart');
-    let items = 0;
-    let total = 0;
 
     retrieveCartData();
 
@@ -24,6 +22,10 @@ $(document).ready(() => {
             success: res => {
                 // Get the data from the response
                 const resData = res.data;
+
+                // Initialize the value of items and total
+                let items = 0;
+                let total = 0;
 
                 // Preset the cart template
                 let cartTemplate = ''; 
@@ -63,9 +65,9 @@ $(document).ready(() => {
                                 <i class="qty-btn plug bi bi-plus-square-fill"></i>
                             </div>
                             <p class="item-stock ${inStock}">${inStock.split('-').join(' ')}</p>
-                            <p class="item-unit-price">Unit Price: $${price}</p>
+                            <p class="item-unit-price">Unit Price: $${price.toFixed(2)}</p>
                         </div>
-                        <p class="item-total">Item Total: <span  class="item-price">$${subtotal}</span></p>
+                        <p class="item-total">Item Total: <span  class="item-price">$${subtotal.toFixed(2)}</span></p>
                         </div>
                         `
                     }
@@ -90,8 +92,9 @@ $(document).ready(() => {
                     e.preventDefault();
 
                     // Get the item ID and current qty
-                    const id = $(this).closest('.item').attr('data-value');
-                    let qty = form.find('[name="qty"]').val();
+                    const item = $(this).closest('.item');
+                    const id = item.attr('data-value');
+                    let qty = item.find('[name="qty"]').val();
 
                     changeQty($(this), id, qty);
                 });
@@ -127,15 +130,18 @@ $(document).ready(() => {
 
     // Count the numbers of item and accumulate the total
     function accumulator(items, total) {
+
+        // Total is rounded to 2 decminal points
         $('.total').html(`
             <p>Item(s): ${items}</p>
-            <p>Subtotal: $${total}</p>
+            <p>Subtotal: $${total.toFixed(2)}</p>
         `);
     };
 
     // Change qty
     function changeQty(btn, id, qty) {
 
+        // THe class determnines whether the quantity should be incresed or decreased
         if (btn.hasClass('minus')) {
             qty--;
         } else if (btn.hasClass('plug')) {
@@ -151,7 +157,8 @@ $(document).ready(() => {
                 data: {id, qty}
             },
             success: res => {
-                console.log(res);
+                // Everytime remove an item from the cart, retrieve all books again
+                retrieveCartData();
             },
             error: err => {
                 console.log(err);
