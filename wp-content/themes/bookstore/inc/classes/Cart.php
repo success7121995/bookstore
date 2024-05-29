@@ -54,44 +54,51 @@ class Cart {
                 // Parse the JSON string
                 $cart_decode = json_decode($cart, true);
 
-                // Add the book to the cart
-                if (!is_array($cart_decode)): // cart would be NULL if no data is stored, in contrast the cart will perform as an array.
-                    
-                    // Check if the book is in stock
-                    $this -> check_is_in_stock();
-                    
-                    $cart_decode = array(array(
-                        'id' => $book_id,
-                        'qty'=> 1
-                    ));
+                // Check if the book is in stock
+                $in_stock = $this -> check_is_in_stock($book_id);
+
+                if (!$in_stock):
+
+                    // The book is currently out of stock 
+                    wp_send_json_error('out_of_stock', 409, 0);
                 else:
-                    for ($i = 0; $i < count($cart_decode); $i++):
-                        // Return error since the book already existed in the list 
-                        if ($cart_decode[$i]['id'] === $book_id):
+                    // Add the book to the cart
+                    if (!is_array($cart_decode)): // cart would be NULL if no data is stored, in contrast the cart will perform as an array.
 
-                            wp_send_json_error('book_already_in_cart', 409, 0);
-                        endif;
+                        $cart_decode = array(array(
+                            'id' => $book_id,
+                            'qty'=> 1
+                        ));
+                    else:
+                        for ($i = 0; $i < count($cart_decode); $i++):
+                            // Return error since the book already existed in the list 
+                            if ($cart_decode[$i]['id'] === $book_id):
 
-                        // Amount of cart exceeds
-                        if (count($cart_decode) >= 4):
-                            wp_send_json_error('max_cart_reached', 403, 0);
-                        endif;
-                    endfor;
+                                wp_send_json_error('book_already_in_cart', 409, 0);
+                            endif;
 
-                    // Append the book to the cart array
-                    $cart_decode[] = array( 
-                        'id' => $book_id,
-                        'qty' => 1
-                    );
+                            // Amount of cart exceeds
+                            if (count($cart_decode) >= 4):
+                                wp_send_json_error('max_cart_reached', 403, 0);
+                            endif;
+                        endfor;
+
+                        // Append the book to the cart array
+                        $cart_decode[] = array( 
+                            'id' => $book_id,
+                            'qty' => 1
+                        );
+                    endif;
+
+                    // Stringigy to JSON
+                    $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
+
+                    // Update the cart
+                    $wpdb -> update('customers', array('cart' => $cart_encode), array('id' => $user_id));
+
+                    wp_send_json_success($cart_decode, 201  , 0);
+
                 endif;
-
-                // Stringigy to JSON
-                $cart_encode = json_encode($cart_decode, JSON_FORCE_OBJECT);
-
-                // Update the cart
-                $wpdb -> update('customers', array('cart' => $cart_encode), array('id' => $user_id));
-
-                wp_send_json_success($cart_decode, 201  , 0);
             } catch (Exception $e) {
                 wp_send_json_error($e, 500, 0);
             }
@@ -298,7 +305,16 @@ class Cart {
     }
 
     // Check if the book is in stock
-    private function check_is_in_stock () {
+    private function check_is_in_stock ($book_id) {
+        // Connect to database
+        global $wpdb;
 
+        // Get ACF's field
+        $field = get_fields($book_id);
+        
+        // Retrieve the number of stock
+        $stock = (int)$field['inventory']; // Convert string to Integer
+
+        return $stock > 0;
     }
 } 
