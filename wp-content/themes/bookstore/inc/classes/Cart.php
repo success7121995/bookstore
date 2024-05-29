@@ -56,6 +56,10 @@ class Cart {
 
                 // Add the book to the cart
                 if (!is_array($cart_decode)): // cart would be NULL if no data is stored, in contrast the cart will perform as an array.
+                    
+                    // Check if the book is in stock
+                    $this -> check_is_in_stock();
+                    
                     $cart_decode = array(array(
                         'id' => $book_id,
                         'qty'=> 1
@@ -291,5 +295,10 @@ class Cart {
         endif;
 
         return $cart_array;
+    }
+
+    // Check if the book is in stock
+    private function check_is_in_stock () {
+
     }
 } 
