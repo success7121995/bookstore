@@ -43,7 +43,7 @@ class Cart {
             wp_send_json_error('book_not_found', 404, 0); // It is not supposed to happen unless the user tempers or remove the data-tab value deliberately
         elseif (!isset($_SESSION['AuthnUser'])):
             // It indicates that the user has not logged in, redirect to login page.
-            wp_send_json_error(get_site_url() . '/login', 401, 0);
+            wp_send_json_error('not_authenticated', 401, 0);
         else: 
             try {
                 // Get user ID from session and retrieve the cart
@@ -263,6 +263,9 @@ class Cart {
         // predefine an array for storing retrieved cart data
         $cart_array = array();
 
+        // Initialize the item
+        $items = 0;
+
         if (!empty($cart_data)):
             foreach ($cart_data as $cart => $value):
                 $book_id = $value['id'];
@@ -278,7 +281,7 @@ class Cart {
                 $title = $query[0] -> post_title;
                 $permalink = $query[0] -> guid;
                 $image = $field['image']['url'];
-                $items += $qty;
+                $items  += $qty;
                 $subtotal = round($price * $qty, 2);
 
                 // Retrieve the number of stock

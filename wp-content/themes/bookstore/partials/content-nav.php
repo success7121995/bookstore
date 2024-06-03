@@ -44,6 +44,7 @@ endif;
 // Will not show the entire navbar in login and signup page
 if ($slug !== 'login' && $slug !== 'signup'):
 ?>
+
 <!-- Topnav Header -->
 <nav id="topnav-header">
     <div class="navbar container">

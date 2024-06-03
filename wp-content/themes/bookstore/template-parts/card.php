@@ -84,7 +84,7 @@ if ($for_sales):
             </div>
         </div>
     </a>
-    <button class="add-to-cart card-box" data-value="<?php echo wp_kses_post($id); ?>"> Add to Cart</button>
+    <button class="add-to-cart card-box" data-value="<?php echo wp_kses_post($id); ?>">Add to Cart</button>
 </div>
 <?php
 endif;

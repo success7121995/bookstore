@@ -137,7 +137,8 @@ $(document).ready(() => {
     $('.add-to-cart').click(function(e) {
         e.preventDefault();
 
-        id = $(this).attr('data-value');
+        const addToCartBtn = $(this);
+        const id = $(this).attr('data-value');
 
         // Fire off the request to the /admin-ajax.php
         $.ajax({
@@ -148,11 +149,25 @@ $(document).ready(() => {
                 action: 'add_to_cart',
                 data: id
             },
-            success: res => {
-                console.log(res);
+            success: () => {
+                // Appear a tick message with changing to green background while it is successfully processed 
+                addToCartBtn.addClass('added');
+                addToCartBtn.text('');
+
+                // Resume normal appearance after 3 seconds
+                setTimeout(function() {
+                    addToCartBtn.removeClass('added');
+                    addToCartBtn.text('Add to Cart');
+                }, 2000);
+
             },
             error: err => {
-                console.log(err.responseJSON.data);
+                const error = err.responseJSON.data; 
+
+                // If user has not logged in, redirect the user to login page
+                if (error === 'not_authenticated') {
+                    window.location.href = '/bookstore/login';
+                }
             }
         });      
     });
