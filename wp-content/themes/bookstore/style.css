@@ -160,7 +160,7 @@ button.add-to-cart {
 }
 
 button.add-to-cart.added {
-    background-color: #2E8B57;
+    background-color: #2E8B56;
     pointer-events: none;
 }
 
